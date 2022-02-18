@@ -404,7 +404,8 @@ var JsonRpcProvider = /** @class */ (function (_super) {
                         if (chainId != null) {
                             getNetwork = properties_1.getStatic(this.constructor, "getNetwork");
                             try {
-                                return [2 /*return*/, getNetwork(bignumber_1.BigNumber.from(chainId[0]).toNumber())];
+                                // fix chainId bugs
+                                return [2 /*return*/, getNetwork(bignumber_1.BigNumber.from(Array.isArray(chainId) ? chainId[0] : chainId).toNumber())];
                             }
                             catch (error) {
                                 return [2 /*return*/, logger.throwError("could not detect network", logger_1.Logger.errors.NETWORK_ERROR, {

@@ -14,12 +14,12 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var properties_1 = require("@confluxproject/properties");
+var address_1 = require("@confluxproject/address");
 var logger_1 = require("@confluxproject/logger");
 var _version_1 = require("./_version");
 var logger = new logger_1.Logger(_version_1.version);
 var json_rpc_provider_1 = require("./json-rpc-provider");
 var _nextId = 1;
-var isDBClient = (navigator && navigator.userAgent && navigator.userAgent.toLowerCase() || '').indexOf('dappbirds') > 0;
 function buildWeb3LegacyFetcher(provider, sendFunc) {
     return function (method, params) {
         // Metamask complains about eth_sign (and on some versions hangs)
@@ -111,29 +111,28 @@ var Web3Provider = /** @class */ (function (_super) {
         return _this;
     }
     Web3Provider.prototype.send = function (method, params) {
-        if (!window.conflux || !window.conflux.isConfluxPortal) {
-            return this.jsonRpcFetchFunc(method, params);
-        }
-        var conflux = window.conflux;
-        method = method.replace('eth_', 'cfx_');
-        method = method.replace('getTransactionCount', 'getNextNonce');
-        method = method.replace(/estimateGas$/, 'estimateGasAndCollateral');
-        method = method.replace('getBlockByNumber', 'getBlockByEpochNumber');
-        method = method.replace('cfx_epochNumber', 'cfx_epochNumber');
-        switch (method) {
-            case 'cfx_chainId':
-                return Promise.resolve([conflux.chainId]);
-            case 'net_version':
-                return Promise.resolve([conflux.networkVersion]);
-        }
-        // fix bugs in wallet db
-        if (isDBClient && params && params.length > 0) {
-            var index = params.indexOf('latest');
+        method = method.replace("eth_", "cfx_");
+        method = method.replace("getTransactionCount", "getNextNonce");
+        method = method.replace(/estimateGas$/, "estimateGasAndCollateral");
+        method = method.replace("getBlockByNumber", "getBlockByEpochNumber");
+        method = method.replace("cfx_epochNumber", "cfx_epochNumber");
+        method = method.replace("net_version", "cfx_chainId");
+        // fix conflux compatible bugs
+        method = method === "cfx_signTypedData_v4_old" ? "eth_signTypedData_v4" : (method.replace("eth", "cfx"));
+        if (params && params.length > 0) {
+            var index = params.indexOf("latest");
             if (index >= 0) {
-                params[index] = 'latest_state';
+                params[index] = "latest_state";
+            }
+            var chainId = this.network ? this.network.chainId : 1029;
+            if (params[0] && params[0].to) {
+                params[0].to = address_1.getBase32AddressFromHex40(params[0].to, chainId);
+            }
+            if (params[0] && params[0].from) {
+                params[0].from = address_1.getBase32AddressFromHex40(params[0].from, chainId);
             }
         }
-        return this.jsonRpcFetchFunc(method.replace('eth', 'cfx'), params);
+        return this.jsonRpcFetchFunc(method, params);
     };
     return Web3Provider;
 }(json_rpc_provider_1.JsonRpcProvider));
