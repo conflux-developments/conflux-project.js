@@ -26,8 +26,7 @@ export function getBase32AddressFromHex40(address: string, chainId: number | und
     if (isLikeBase32Address(address)) {
         return address
     }
-    const hexBuffer = Buffer.from(address.slice(2), 'hex');
-    return confluxAddressEncode(hexBuffer, chainId)
+    return confluxAddressEncode(address, chainId)
 }
 
 export function getHex40AddressFromBase32(address: string): string {

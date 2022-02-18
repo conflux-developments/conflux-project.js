@@ -5,7 +5,7 @@ var bignumber_1 = require("@confluxproject/bignumber");
 var keccak256_1 = require("@confluxproject/keccak256");
 var rlp_1 = require("@confluxproject/rlp");
 // @ts-ignore
-var conflux_address_js_1 = require("conflux-address-js");
+var conflux_address_js_1 = require("@conflux-dev/conflux-address-js");
 var logger_1 = require("@confluxproject/logger");
 var _version_1 = require("./_version");
 var logger = new logger_1.Logger(_version_1.version);
@@ -22,8 +22,7 @@ function getBase32AddressFromHex40(address, chainId) {
     if (isLikeBase32Address(address)) {
         return address;
     }
-    var hexBuffer = Buffer.from(address.slice(2), 'hex');
-    return conflux_address_js_1.encode(hexBuffer, chainId);
+    return conflux_address_js_1.encode(address, chainId);
 }
 exports.getBase32AddressFromHex40 = getBase32AddressFromHex40;
 function getHex40AddressFromBase32(address) {
