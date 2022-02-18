@@ -293,7 +293,8 @@ export class JsonRpcProvider extends BaseProvider {
             if (chainId != null) {
                 const getNetwork = getStatic(this.constructor, "getNetwork");
                 try {
-                    return getNetwork(BigNumber.from(chainId[0]).toNumber());
+                    // fix chainId bugs
+                    return getNetwork(BigNumber.from(Array.isArray(chainId) ? chainId[0] : chainId).toNumber());
                 }
                 catch (error) {
                     return logger.throwError("could not detect network", Logger.errors.NETWORK_ERROR, {

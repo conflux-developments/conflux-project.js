@@ -1,4 +1,4 @@
-import assert$6 from 'assert';
+import require$$0 from '@conflux-dev/conflux-address-rust';
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -6442,1738 +6442,26 @@ var index = /*#__PURE__*/Object.freeze({
 	decode: decode
 });
 
-var _from = "bigi@^1.4.2";
-var _id = "bigi@1.4.2";
-var _inBundle = false;
-var _integrity = "sha1-nGZalfiLiwj8Bc/XMfVhhZ1yWCU=";
-var _location = "/bigi";
-var _phantomChildren = {
-};
-var _requested = {
-	type: "range",
-	registry: true,
-	raw: "bigi@^1.4.2",
-	name: "bigi",
-	escapedName: "bigi",
-	rawSpec: "^1.4.2",
-	saveSpec: null,
-	fetchSpec: "^1.4.2"
-};
-var _requiredBy = [
-	"/conflux-address-js"
-];
-var _resolved = "https://registry.npmjs.org/bigi/-/bigi-1.4.2.tgz";
-var _shasum = "9c665a95f88b8b08fc05cfd731f561859d725825";
-var _spec = "bigi@^1.4.2";
-var _where = "/Users/raisezhang/Documents/GitHub/conflux-project.js/node_modules/conflux-address-js";
-var bugs = {
-	url: "https://github.com/cryptocoinjs/bigi/issues"
-};
-var bundleDependencies = false;
-var dependencies = {
-};
-var deprecated = false;
-var description = "Big integers.";
-var devDependencies = {
-	coveralls: "^2.11.2",
-	istanbul: "^0.3.5",
-	jshint: "^2.5.1",
-	mocha: "^2.1.0",
-	mochify: "^2.1.0"
-};
-var homepage = "https://github.com/cryptocoinjs/bigi#readme";
-var keywords = [
-	"cryptography",
-	"math",
-	"bitcoin",
-	"arbitrary",
-	"precision",
-	"arithmetic",
-	"big",
-	"integer",
-	"int",
-	"number",
-	"biginteger",
-	"bigint",
-	"bignumber",
-	"decimal",
-	"float"
-];
-var main = "./lib/index.js";
-var name$1 = "bigi";
-var repository = {
-	url: "git+https://github.com/cryptocoinjs/bigi.git",
-	type: "git"
-};
-var scripts = {
-	"browser-test": "mochify --wd -R spec",
-	coverage: "istanbul cover ./node_modules/.bin/_mocha -- --reporter list test/*.js",
-	coveralls: "npm run-script coverage && node ./node_modules/.bin/coveralls < coverage/lcov.info",
-	jshint: "jshint --config jshint.json lib/*.js ; true",
-	test: "_mocha -- test/*.js",
-	unit: "mocha"
-};
-var testling = {
-	files: "test/*.js",
-	harness: "mocha",
-	browsers: [
-		"ie/9..latest",
-		"firefox/latest",
-		"chrome/latest",
-		"safari/6.0..latest",
-		"iphone/6.0..latest",
-		"android-browser/4.2..latest"
-	]
-};
-var version$6 = "1.4.2";
-var require$$0 = {
-	_from: _from,
-	_id: _id,
-	_inBundle: _inBundle,
-	_integrity: _integrity,
-	_location: _location,
-	_phantomChildren: _phantomChildren,
-	_requested: _requested,
-	_requiredBy: _requiredBy,
-	_resolved: _resolved,
-	_shasum: _shasum,
-	_spec: _spec,
-	_where: _where,
-	bugs: bugs,
-	bundleDependencies: bundleDependencies,
-	dependencies: dependencies,
-	deprecated: deprecated,
-	description: description,
-	devDependencies: devDependencies,
-	homepage: homepage,
-	keywords: keywords,
-	main: main,
-	name: name$1,
-	repository: repository,
-	scripts: scripts,
-	testling: testling,
-	version: version$6
-};
+class JSBI extends Array{constructor(i,_){if(super(i),this.sign=_,i>JSBI.__kMaxLength)throw new RangeError("Maximum BigInt size exceeded")}static BigInt(i){var _=Math.floor,t=Number.isFinite;if("number"==typeof i){if(0===i)return JSBI.__zero();if(JSBI.__isOneDigitInt(i))return 0>i?JSBI.__oneDigit(-i,!0):JSBI.__oneDigit(i,!1);if(!t(i)||_(i)!==i)throw new RangeError("The number "+i+" cannot be converted to BigInt because it is not an integer");return JSBI.__fromDouble(i)}if("string"==typeof i){const _=JSBI.__fromString(i);if(null===_)throw new SyntaxError("Cannot convert "+i+" to a BigInt");return _}if("boolean"==typeof i)return !0===i?JSBI.__oneDigit(1,!1):JSBI.__zero();if("object"==typeof i){if(i.constructor===JSBI)return i;const _=JSBI.__toPrimitive(i);return JSBI.BigInt(_)}throw new TypeError("Cannot convert "+i+" to a BigInt")}toDebugString(){const i=["BigInt["];for(const _ of this)i.push((_?(_>>>0).toString(16):_)+", ");return i.push("]"),i.join("")}toString(i=10){if(2>i||36<i)throw new RangeError("toString() radix argument must be between 2 and 36");return 0===this.length?"0":0==(i&i-1)?JSBI.__toStringBasePowerOfTwo(this,i):JSBI.__toStringGeneric(this,i,!1)}static toNumber(i){const _=i.length;if(0===_)return 0;if(1===_){const _=i.__unsignedDigit(0);return i.sign?-_:_}const t=i.__digit(_-1),e=JSBI.__clz30(t),n=30*_-e;if(1024<n)return i.sign?-Infinity:1/0;let g=n-1,o=t,s=_-1;const l=e+3;let r=32===l?0:o<<l;r>>>=12;const a=l-12;let u=12<=l?0:o<<20+l,d=20+l;for(0<a&&0<s&&(s--,o=i.__digit(s),r|=o>>>30-a,u=o<<a+2,d=a+2);0<d&&0<s;)s--,o=i.__digit(s),u|=30<=d?o<<d-30:o>>>30-d,d-=30;const h=JSBI.__decideRounding(i,d,s,o);if((1===h||0===h&&1==(1&u))&&(u=u+1>>>0,0===u&&(r++,0!=r>>>20&&(r=0,g++,1023<g))))return i.sign?-Infinity:1/0;const m=i.sign?-2147483648:0;return g=g+1023<<20,JSBI.__kBitConversionInts[1]=m|g|r,JSBI.__kBitConversionInts[0]=u,JSBI.__kBitConversionDouble[0]}static unaryMinus(i){if(0===i.length)return i;const _=i.__copy();return _.sign=!i.sign,_}static bitwiseNot(i){return i.sign?JSBI.__absoluteSubOne(i).__trim():JSBI.__absoluteAddOne(i,!0)}static exponentiate(i,_){if(_.sign)throw new RangeError("Exponent must be positive");if(0===_.length)return JSBI.__oneDigit(1,!1);if(0===i.length)return i;if(1===i.length&&1===i.__digit(0))return i.sign&&0==(1&_.__digit(0))?JSBI.unaryMinus(i):i;if(1<_.length)throw new RangeError("BigInt too big");let t=_.__unsignedDigit(0);if(1===t)return i;if(t>=JSBI.__kMaxLengthBits)throw new RangeError("BigInt too big");if(1===i.length&&2===i.__digit(0)){const _=1+(0|t/30),e=i.sign&&0!=(1&t),n=new JSBI(_,e);n.__initializeDigits();const g=1<<t%30;return n.__setDigit(_-1,g),n}let e=null,n=i;for(0!=(1&t)&&(e=i),t>>=1;0!==t;t>>=1)n=JSBI.multiply(n,n),0!=(1&t)&&(null===e?e=n:e=JSBI.multiply(e,n));return e}static multiply(_,t){if(0===_.length)return _;if(0===t.length)return t;let i=_.length+t.length;30<=_.__clzmsd()+t.__clzmsd()&&i--;const e=new JSBI(i,_.sign!==t.sign);e.__initializeDigits();for(let n=0;n<_.length;n++)JSBI.__multiplyAccumulate(t,_.__digit(n),e,n);return e.__trim()}static divide(i,_){if(0===_.length)throw new RangeError("Division by zero");if(0>JSBI.__absoluteCompare(i,_))return JSBI.__zero();const t=i.sign!==_.sign,e=_.__unsignedDigit(0);let n;if(1===_.length&&32767>=e){if(1===e)return t===i.sign?i:JSBI.unaryMinus(i);n=JSBI.__absoluteDivSmall(i,e,null);}else n=JSBI.__absoluteDivLarge(i,_,!0,!1);return n.sign=t,n.__trim()}static remainder(i,_){if(0===_.length)throw new RangeError("Division by zero");if(0>JSBI.__absoluteCompare(i,_))return i;const t=_.__unsignedDigit(0);if(1===_.length&&32767>=t){if(1===t)return JSBI.__zero();const _=JSBI.__absoluteModSmall(i,t);return 0===_?JSBI.__zero():JSBI.__oneDigit(_,i.sign)}const e=JSBI.__absoluteDivLarge(i,_,!1,!0);return e.sign=i.sign,e.__trim()}static add(i,_){const t=i.sign;return t===_.sign?JSBI.__absoluteAdd(i,_,t):0<=JSBI.__absoluteCompare(i,_)?JSBI.__absoluteSub(i,_,t):JSBI.__absoluteSub(_,i,!t)}static subtract(i,_){const t=i.sign;return t===_.sign?0<=JSBI.__absoluteCompare(i,_)?JSBI.__absoluteSub(i,_,t):JSBI.__absoluteSub(_,i,!t):JSBI.__absoluteAdd(i,_,t)}static leftShift(i,_){return 0===_.length||0===i.length?i:_.sign?JSBI.__rightShiftByAbsolute(i,_):JSBI.__leftShiftByAbsolute(i,_)}static signedRightShift(i,_){return 0===_.length||0===i.length?i:_.sign?JSBI.__leftShiftByAbsolute(i,_):JSBI.__rightShiftByAbsolute(i,_)}static unsignedRightShift(){throw new TypeError("BigInts have no unsigned right shift; use >> instead")}static lessThan(i,_){return 0>JSBI.__compareToBigInt(i,_)}static lessThanOrEqual(i,_){return 0>=JSBI.__compareToBigInt(i,_)}static greaterThan(i,_){return 0<JSBI.__compareToBigInt(i,_)}static greaterThanOrEqual(i,_){return 0<=JSBI.__compareToBigInt(i,_)}static equal(_,t){if(_.sign!==t.sign)return !1;if(_.length!==t.length)return !1;for(let e=0;e<_.length;e++)if(_.__digit(e)!==t.__digit(e))return !1;return !0}static notEqual(i,_){return !JSBI.equal(i,_)}static bitwiseAnd(i,_){var t=Math.max;if(!i.sign&&!_.sign)return JSBI.__absoluteAnd(i,_).__trim();if(i.sign&&_.sign){const e=t(i.length,_.length)+1;let n=JSBI.__absoluteSubOne(i,e);const g=JSBI.__absoluteSubOne(_);return n=JSBI.__absoluteOr(n,g,n),JSBI.__absoluteAddOne(n,!0,n).__trim()}return i.sign&&([i,_]=[_,i]),JSBI.__absoluteAndNot(i,JSBI.__absoluteSubOne(_)).__trim()}static bitwiseXor(i,_){var t=Math.max;if(!i.sign&&!_.sign)return JSBI.__absoluteXor(i,_).__trim();if(i.sign&&_.sign){const e=t(i.length,_.length),n=JSBI.__absoluteSubOne(i,e),g=JSBI.__absoluteSubOne(_);return JSBI.__absoluteXor(n,g,n).__trim()}const e=t(i.length,_.length)+1;i.sign&&([i,_]=[_,i]);let n=JSBI.__absoluteSubOne(_,e);return n=JSBI.__absoluteXor(n,i,n),JSBI.__absoluteAddOne(n,!0,n).__trim()}static bitwiseOr(i,_){var t=Math.max;const e=t(i.length,_.length);if(!i.sign&&!_.sign)return JSBI.__absoluteOr(i,_).__trim();if(i.sign&&_.sign){let t=JSBI.__absoluteSubOne(i,e);const n=JSBI.__absoluteSubOne(_);return t=JSBI.__absoluteAnd(t,n,t),JSBI.__absoluteAddOne(t,!0,t).__trim()}i.sign&&([i,_]=[_,i]);let n=JSBI.__absoluteSubOne(_,e);return n=JSBI.__absoluteAndNot(n,i,n),JSBI.__absoluteAddOne(n,!0,n).__trim()}static asIntN(_,t){var i=Math.floor;if(0===t.length)return t;if(_=i(_),0>_)throw new RangeError("Invalid value: not (convertible to) a safe integer");if(0===_)return JSBI.__zero();if(_>=JSBI.__kMaxLengthBits)return t;const e=0|(_+29)/30;if(t.length<e)return t;const g=t.__unsignedDigit(e-1),o=1<<(_-1)%30;if(t.length===e&&g<o)return t;if(!((g&o)===o))return JSBI.__truncateToNBits(_,t);if(!t.sign)return JSBI.__truncateAndSubFromPowerOfTwo(_,t,!0);if(0==(g&o-1)){for(let n=e-2;0<=n;n--)if(0!==t.__digit(n))return JSBI.__truncateAndSubFromPowerOfTwo(_,t,!1);return t.length===e&&g===o?t:JSBI.__truncateToNBits(_,t)}return JSBI.__truncateAndSubFromPowerOfTwo(_,t,!1)}static asUintN(i,_){var t=Math.floor;if(0===_.length)return _;if(i=t(i),0>i)throw new RangeError("Invalid value: not (convertible to) a safe integer");if(0===i)return JSBI.__zero();if(_.sign){if(i>JSBI.__kMaxLengthBits)throw new RangeError("BigInt too big");return JSBI.__truncateAndSubFromPowerOfTwo(i,_,!1)}if(i>=JSBI.__kMaxLengthBits)return _;const e=0|(i+29)/30;if(_.length<e)return _;const g=i%30;if(_.length==e){if(0===g)return _;const i=_.__digit(e-1);if(0==i>>>g)return _}return JSBI.__truncateToNBits(i,_)}static ADD(i,_){if(i=JSBI.__toPrimitive(i),_=JSBI.__toPrimitive(_),"string"==typeof i)return "string"!=typeof _&&(_=_.toString()),i+_;if("string"==typeof _)return i.toString()+_;if(i=JSBI.__toNumeric(i),_=JSBI.__toNumeric(_),JSBI.__isBigInt(i)&&JSBI.__isBigInt(_))return JSBI.add(i,_);if("number"==typeof i&&"number"==typeof _)return i+_;throw new TypeError("Cannot mix BigInt and other types, use explicit conversions")}static LT(i,_){return JSBI.__compare(i,_,0)}static LE(i,_){return JSBI.__compare(i,_,1)}static GT(i,_){return JSBI.__compare(i,_,2)}static GE(i,_){return JSBI.__compare(i,_,3)}static EQ(i,_){for(;;){if(JSBI.__isBigInt(i))return JSBI.__isBigInt(_)?JSBI.equal(i,_):JSBI.EQ(_,i);if("number"==typeof i){if(JSBI.__isBigInt(_))return JSBI.__equalToNumber(_,i);if("object"!=typeof _)return i==_;_=JSBI.__toPrimitive(_);}else if("string"==typeof i){if(JSBI.__isBigInt(_))return i=JSBI.__fromString(i),null!==i&&JSBI.equal(i,_);if("object"!=typeof _)return i==_;_=JSBI.__toPrimitive(_);}else if("boolean"==typeof i){if(JSBI.__isBigInt(_))return JSBI.__equalToNumber(_,+i);if("object"!=typeof _)return i==_;_=JSBI.__toPrimitive(_);}else if("symbol"==typeof i){if(JSBI.__isBigInt(_))return !1;if("object"!=typeof _)return i==_;_=JSBI.__toPrimitive(_);}else if("object"==typeof i){if("object"==typeof _&&_.constructor!==JSBI)return i==_;i=JSBI.__toPrimitive(i);}else return i==_}}static NE(i,_){return !JSBI.EQ(i,_)}static __zero(){return new JSBI(0,!1)}static __oneDigit(i,_){const t=new JSBI(1,_);return t.__setDigit(0,i),t}__copy(){const _=new JSBI(this.length,this.sign);for(let t=0;t<this.length;t++)_[t]=this[t];return _}__trim(){let i=this.length,_=this[i-1];for(;0===_;)i--,_=this[i-1],this.pop();return 0===i&&(this.sign=!1),this}__initializeDigits(){for(let _=0;_<this.length;_++)this[_]=0;}static __decideRounding(i,_,t,e){if(0<_)return -1;let n;if(0>_)n=-_-1;else {if(0===t)return -1;t--,e=i.__digit(t),n=29;}let g=1<<n;if(0==(e&g))return -1;if(g-=1,0!=(e&g))return 1;for(;0<t;)if(t--,0!==i.__digit(t))return 1;return 0}static __fromDouble(i){JSBI.__kBitConversionDouble[0]=i;const _=2047&JSBI.__kBitConversionInts[1]>>>20,t=_-1023,e=(0|t/30)+1,n=new JSBI(e,0>i);let g=1048575&JSBI.__kBitConversionInts[1]|1048576,o=JSBI.__kBitConversionInts[0];const s=20,l=t%30;let r,a=0;if(l<20){const i=s-l;a=i+32,r=g>>>i,g=g<<32-i|o>>>i,o<<=32-i;}else if(l===20)a=32,r=g,g=o,o=0;else {const i=l-s;a=32-i,r=g<<i|o>>>32-i,g=o<<i,o=0;}n.__setDigit(e-1,r);for(let _=e-2;0<=_;_--)0<a?(a-=30,r=g>>>2,g=g<<30|o>>>2,o<<=30):r=0,n.__setDigit(_,r);return n.__trim()}static __isWhitespace(i){return !!(13>=i&&9<=i)||(159>=i?32==i:131071>=i?160==i||5760==i:196607>=i?(i&=131071,10>=i||40==i||41==i||47==i||95==i||4096==i):65279==i)}static __fromString(i,_=0){let t=0;const e=i.length;let n=0;if(n===e)return JSBI.__zero();let g=i.charCodeAt(n);for(;JSBI.__isWhitespace(g);){if(++n===e)return JSBI.__zero();g=i.charCodeAt(n);}if(43===g){if(++n===e)return null;g=i.charCodeAt(n),t=1;}else if(45===g){if(++n===e)return null;g=i.charCodeAt(n),t=-1;}if(0===_){if(_=10,48===g){if(++n===e)return JSBI.__zero();if(g=i.charCodeAt(n),88===g||120===g){if(_=16,++n===e)return null;g=i.charCodeAt(n);}else if(79===g||111===g){if(_=8,++n===e)return null;g=i.charCodeAt(n);}else if(66===g||98===g){if(_=2,++n===e)return null;g=i.charCodeAt(n);}}}else if(16===_&&48===g){if(++n===e)return JSBI.__zero();if(g=i.charCodeAt(n),88===g||120===g){if(++n===e)return null;g=i.charCodeAt(n);}}if(0!=t&&10!==_)return null;for(;48===g;){if(++n===e)return JSBI.__zero();g=i.charCodeAt(n);}const o=e-n;let s=JSBI.__kMaxBitsPerChar[_],l=JSBI.__kBitsPerCharTableMultiplier-1;if(o>1073741824/s)return null;const r=s*o+l>>>JSBI.__kBitsPerCharTableShift,a=new JSBI(0|(r+29)/30,!1),u=10>_?_:10,h=10<_?_-10:0;if(0==(_&_-1)){s>>=JSBI.__kBitsPerCharTableShift;const _=[],t=[];let o=!1;do{let l=0,r=0;for(;;){let _;if(g-48>>>0<u)_=g-48;else if((32|g)-97>>>0<h)_=(32|g)-87;else {o=!0;break}if(r+=s,l=l<<s|_,++n===e){o=!0;break}if(g=i.charCodeAt(n),30<r+s)break}_.push(l),t.push(r);}while(!o);JSBI.__fillFromParts(a,_,t);}else {a.__initializeDigits();let t=!1,o=0;do{let r=0,b=1;for(;;){let s;if(g-48>>>0<u)s=g-48;else if((32|g)-97>>>0<h)s=(32|g)-87;else {t=!0;break}const l=b*_;if(1073741823<l)break;if(b=l,r=r*_+s,o++,++n===e){t=!0;break}g=i.charCodeAt(n);}l=30*JSBI.__kBitsPerCharTableMultiplier-1;const D=0|(s*o+l>>>JSBI.__kBitsPerCharTableShift)/30;a.__inplaceMultiplyAdd(b,r,D);}while(!t)}if(n!==e){if(!JSBI.__isWhitespace(g))return null;for(n++;n<e;n++)if(g=i.charCodeAt(n),!JSBI.__isWhitespace(g))return null}return a.sign=-1==t,a.__trim()}static __fillFromParts(_,t,e){let n=0,g=0,o=0;for(let s=t.length-1;0<=s;s--){const i=t[s],l=e[s];g|=i<<o,o+=l,30===o?(_.__setDigit(n++,g),o=0,g=0):30<o&&(_.__setDigit(n++,1073741823&g),o-=30,g=i>>>l-o);}if(0!==g){if(n>=_.length)throw new Error("implementation bug");_.__setDigit(n++,g);}for(;n<_.length;n++)_.__setDigit(n,0);}static __toStringBasePowerOfTwo(_,i){const t=_.length;let e=i-1;e=(85&e>>>1)+(85&e),e=(51&e>>>2)+(51&e),e=(15&e>>>4)+(15&e);const n=e,g=i-1,o=_.__digit(t-1),s=JSBI.__clz30(o);let l=0|(30*t-s+n-1)/n;if(_.sign&&l++,268435456<l)throw new Error("string too long");const r=Array(l);let a=l-1,u=0,d=0;for(let e=0;e<t-1;e++){const i=_.__digit(e),t=(u|i<<d)&g;r[a--]=JSBI.__kConversionChars[t];const o=n-d;for(u=i>>>o,d=30-o;d>=n;)r[a--]=JSBI.__kConversionChars[u&g],u>>>=n,d-=n;}const h=(u|o<<d)&g;for(r[a--]=JSBI.__kConversionChars[h],u=o>>>n-d;0!==u;)r[a--]=JSBI.__kConversionChars[u&g],u>>>=n;if(_.sign&&(r[a--]="-"),-1!=a)throw new Error("implementation bug");return r.join("")}static __toStringGeneric(_,i,t){const e=_.length;if(0===e)return "";if(1===e){let e=_.__unsignedDigit(0).toString(i);return !1===t&&_.sign&&(e="-"+e),e}const n=30*e-JSBI.__clz30(_.__digit(e-1)),g=JSBI.__kMaxBitsPerChar[i],o=g-1;let s=n*JSBI.__kBitsPerCharTableMultiplier;s+=o-1,s=0|s/o;const l=s+1>>1,r=JSBI.exponentiate(JSBI.__oneDigit(i,!1),JSBI.__oneDigit(l,!1));let a,u;const d=r.__unsignedDigit(0);if(1===r.length&&32767>=d){a=new JSBI(_.length,!1),a.__initializeDigits();let t=0;for(let e=2*_.length-1;0<=e;e--){const i=t<<15|_.__halfDigit(e);a.__setHalfDigit(e,0|i/d),t=0|i%d;}u=t.toString(i);}else {const t=JSBI.__absoluteDivLarge(_,r,!0,!0);a=t.quotient;const e=t.remainder.__trim();u=JSBI.__toStringGeneric(e,i,!0);}a.__trim();let h=JSBI.__toStringGeneric(a,i,!0);for(;u.length<l;)u="0"+u;return !1===t&&_.sign&&(h="-"+h),h+u}static __unequalSign(i){return i?-1:1}static __absoluteGreater(i){return i?-1:1}static __absoluteLess(i){return i?1:-1}static __compareToBigInt(i,_){const t=i.sign;if(t!==_.sign)return JSBI.__unequalSign(t);const e=JSBI.__absoluteCompare(i,_);return 0<e?JSBI.__absoluteGreater(t):0>e?JSBI.__absoluteLess(t):0}static __compareToNumber(i,_){if(JSBI.__isOneDigitInt(_)){const t=i.sign,e=0>_;if(t!==e)return JSBI.__unequalSign(t);if(0===i.length){if(e)throw new Error("implementation bug");return 0===_?0:-1}if(1<i.length)return JSBI.__absoluteGreater(t);const n=Math.abs(_),g=i.__unsignedDigit(0);return g>n?JSBI.__absoluteGreater(t):g<n?JSBI.__absoluteLess(t):0}return JSBI.__compareToDouble(i,_)}static __compareToDouble(i,_){if(_!==_)return _;if(_===1/0)return -1;if(_===-Infinity)return 1;const t=i.sign;if(t!==0>_)return JSBI.__unequalSign(t);if(0===_)throw new Error("implementation bug: should be handled elsewhere");if(0===i.length)return -1;JSBI.__kBitConversionDouble[0]=_;const e=2047&JSBI.__kBitConversionInts[1]>>>20;if(2047==e)throw new Error("implementation bug: handled elsewhere");const n=e-1023;if(0>n)return JSBI.__absoluteGreater(t);const g=i.length;let o=i.__digit(g-1);const s=JSBI.__clz30(o),l=30*g-s,r=n+1;if(l<r)return JSBI.__absoluteLess(t);if(l>r)return JSBI.__absoluteGreater(t);let a=1048576|1048575&JSBI.__kBitConversionInts[1],u=JSBI.__kBitConversionInts[0];const d=20,h=29-s;if(h!==(0|(l-1)%30))throw new Error("implementation bug");let m,b=0;if(20>h){const i=d-h;b=i+32,m=a>>>i,a=a<<32-i|u>>>i,u<<=32-i;}else if(20===h)b=32,m=a,a=u,u=0;else {const i=h-d;b=32-i,m=a<<i|u>>>32-i,a=u<<i,u=0;}if(o>>>=0,m>>>=0,o>m)return JSBI.__absoluteGreater(t);if(o<m)return JSBI.__absoluteLess(t);for(let e=g-2;0<=e;e--){0<b?(b-=30,m=a>>>2,a=a<<30|u>>>2,u<<=30):m=0;const _=i.__unsignedDigit(e);if(_>m)return JSBI.__absoluteGreater(t);if(_<m)return JSBI.__absoluteLess(t)}if(0!==a||0!==u){if(0===b)throw new Error("implementation bug");return JSBI.__absoluteLess(t)}return 0}static __equalToNumber(i,_){var t=Math.abs;return JSBI.__isOneDigitInt(_)?0===_?0===i.length:1===i.length&&i.sign===0>_&&i.__unsignedDigit(0)===t(_):0===JSBI.__compareToDouble(i,_)}static __comparisonResultToBool(i,_){return 0===_?0>i:1===_?0>=i:2===_?0<i:3===_?0<=i:void 0}static __compare(i,_,t){if(i=JSBI.__toPrimitive(i),_=JSBI.__toPrimitive(_),"string"==typeof i&&"string"==typeof _)switch(t){case 0:return i<_;case 1:return i<=_;case 2:return i>_;case 3:return i>=_;}if(JSBI.__isBigInt(i)&&"string"==typeof _)return _=JSBI.__fromString(_),null!==_&&JSBI.__comparisonResultToBool(JSBI.__compareToBigInt(i,_),t);if("string"==typeof i&&JSBI.__isBigInt(_))return i=JSBI.__fromString(i),null!==i&&JSBI.__comparisonResultToBool(JSBI.__compareToBigInt(i,_),t);if(i=JSBI.__toNumeric(i),_=JSBI.__toNumeric(_),JSBI.__isBigInt(i)){if(JSBI.__isBigInt(_))return JSBI.__comparisonResultToBool(JSBI.__compareToBigInt(i,_),t);if("number"!=typeof _)throw new Error("implementation bug");return JSBI.__comparisonResultToBool(JSBI.__compareToNumber(i,_),t)}if("number"!=typeof i)throw new Error("implementation bug");if(JSBI.__isBigInt(_))return JSBI.__comparisonResultToBool(JSBI.__compareToNumber(_,i),2^t);if("number"!=typeof _)throw new Error("implementation bug");return 0===t?i<_:1===t?i<=_:2===t?i>_:3===t?i>=_:void 0}__clzmsd(){return JSBI.__clz30(this.__digit(this.length-1))}static __absoluteAdd(_,t,e){if(_.length<t.length)return JSBI.__absoluteAdd(t,_,e);if(0===_.length)return _;if(0===t.length)return _.sign===e?_:JSBI.unaryMinus(_);let n=_.length;(0===_.__clzmsd()||t.length===_.length&&0===t.__clzmsd())&&n++;const g=new JSBI(n,e);let o=0,s=0;for(;s<t.length;s++){const i=_.__digit(s)+t.__digit(s)+o;o=i>>>30,g.__setDigit(s,1073741823&i);}for(;s<_.length;s++){const i=_.__digit(s)+o;o=i>>>30,g.__setDigit(s,1073741823&i);}return s<g.length&&g.__setDigit(s,o),g.__trim()}static __absoluteSub(_,t,e){if(0===_.length)return _;if(0===t.length)return _.sign===e?_:JSBI.unaryMinus(_);const n=new JSBI(_.length,e);let g=0,o=0;for(;o<t.length;o++){const i=_.__digit(o)-t.__digit(o)-g;g=1&i>>>30,n.__setDigit(o,1073741823&i);}for(;o<_.length;o++){const i=_.__digit(o)-g;g=1&i>>>30,n.__setDigit(o,1073741823&i);}return n.__trim()}static __absoluteAddOne(_,i,t=null){const e=_.length;null===t?t=new JSBI(e,i):t.sign=i;let n=1;for(let g=0;g<e;g++){const i=_.__digit(g)+n;n=i>>>30,t.__setDigit(g,1073741823&i);}return 0!=n&&t.__setDigitGrow(e,1),t}static __absoluteSubOne(_,t){const e=_.length;t=t||e;const n=new JSBI(t,!1);let g=1;for(let o=0;o<e;o++){const i=_.__digit(o)-g;g=1&i>>>30,n.__setDigit(o,1073741823&i);}if(0!=g)throw new Error("implementation bug");for(let g=e;g<t;g++)n.__setDigit(g,0);return n}static __absoluteAnd(_,t,e=null){let n=_.length,g=t.length,o=g;if(n<g){o=n;const i=_,e=n;_=t,n=g,t=i,g=e;}let s=o;null===e?e=new JSBI(s,!1):s=e.length;let l=0;for(;l<o;l++)e.__setDigit(l,_.__digit(l)&t.__digit(l));for(;l<s;l++)e.__setDigit(l,0);return e}static __absoluteAndNot(_,t,e=null){const n=_.length,g=t.length;let o=g;n<g&&(o=n);let s=n;null===e?e=new JSBI(s,!1):s=e.length;let l=0;for(;l<o;l++)e.__setDigit(l,_.__digit(l)&~t.__digit(l));for(;l<n;l++)e.__setDigit(l,_.__digit(l));for(;l<s;l++)e.__setDigit(l,0);return e}static __absoluteOr(_,t,e=null){let n=_.length,g=t.length,o=g;if(n<g){o=n;const i=_,e=n;_=t,n=g,t=i,g=e;}let s=n;null===e?e=new JSBI(s,!1):s=e.length;let l=0;for(;l<o;l++)e.__setDigit(l,_.__digit(l)|t.__digit(l));for(;l<n;l++)e.__setDigit(l,_.__digit(l));for(;l<s;l++)e.__setDigit(l,0);return e}static __absoluteXor(_,t,e=null){let n=_.length,g=t.length,o=g;if(n<g){o=n;const i=_,e=n;_=t,n=g,t=i,g=e;}let s=n;null===e?e=new JSBI(s,!1):s=e.length;let l=0;for(;l<o;l++)e.__setDigit(l,_.__digit(l)^t.__digit(l));for(;l<n;l++)e.__setDigit(l,_.__digit(l));for(;l<s;l++)e.__setDigit(l,0);return e}static __absoluteCompare(_,t){const e=_.length-t.length;if(0!=e)return e;let n=_.length-1;for(;0<=n&&_.__digit(n)===t.__digit(n);)n--;return 0>n?0:_.__unsignedDigit(n)>t.__unsignedDigit(n)?1:-1}static __multiplyAccumulate(_,t,e,n){if(0===t)return;const g=32767&t,o=t>>>15;let s=0,l=0;for(let r,a=0;a<_.length;a++,n++){r=e.__digit(n);const i=_.__digit(a),t=32767&i,u=i>>>15,d=JSBI.__imul(t,g),h=JSBI.__imul(t,o),m=JSBI.__imul(u,g),b=JSBI.__imul(u,o);r+=l+d+s,s=r>>>30,r&=1073741823,r+=((32767&h)<<15)+((32767&m)<<15),s+=r>>>30,l=b+(h>>>15)+(m>>>15),e.__setDigit(n,1073741823&r);}for(;0!=s||0!==l;n++){let i=e.__digit(n);i+=s+l,l=0,s=i>>>30,e.__setDigit(n,1073741823&i);}}static __internalMultiplyAdd(_,t,e,g,o){let s=e,l=0;for(let n=0;n<g;n++){const i=_.__digit(n),e=JSBI.__imul(32767&i,t),g=JSBI.__imul(i>>>15,t),a=e+((32767&g)<<15)+l+s;s=a>>>30,l=g>>>15,o.__setDigit(n,1073741823&a);}if(o.length>g)for(o.__setDigit(g++,s+l);g<o.length;)o.__setDigit(g++,0);else if(0!==s+l)throw new Error("implementation bug")}__inplaceMultiplyAdd(i,_,t){t>this.length&&(t=this.length);const e=32767&i,n=i>>>15;let g=0,o=_;for(let s=0;s<t;s++){const i=this.__digit(s),_=32767&i,t=i>>>15,l=JSBI.__imul(_,e),r=JSBI.__imul(_,n),a=JSBI.__imul(t,e),u=JSBI.__imul(t,n);let d=o+l+g;g=d>>>30,d&=1073741823,d+=((32767&r)<<15)+((32767&a)<<15),g+=d>>>30,o=u+(r>>>15)+(a>>>15),this.__setDigit(s,1073741823&d);}if(0!=g||0!==o)throw new Error("implementation bug")}static __absoluteDivSmall(_,t,e=null){null===e&&(e=new JSBI(_.length,!1));let n=0;for(let g,o=2*_.length-1;0<=o;o-=2){g=(n<<15|_.__halfDigit(o))>>>0;const i=0|g/t;n=0|g%t,g=(n<<15|_.__halfDigit(o-1))>>>0;const s=0|g/t;n=0|g%t,e.__setDigit(o>>>1,i<<15|s);}return e}static __absoluteModSmall(_,t){let e=0;for(let n=2*_.length-1;0<=n;n--){const i=(e<<15|_.__halfDigit(n))>>>0;e=0|i%t;}return e}static __absoluteDivLarge(i,_,t,e){const g=_.__halfDigitLength(),n=_.length,o=i.__halfDigitLength()-g;let s=null;t&&(s=new JSBI(o+2>>>1,!1),s.__initializeDigits());const l=new JSBI(g+2>>>1,!1);l.__initializeDigits();const r=JSBI.__clz15(_.__halfDigit(g-1));0<r&&(_=JSBI.__specialLeftShift(_,r,0));const a=JSBI.__specialLeftShift(i,r,1),u=_.__halfDigit(g-1);let d=0;for(let r,h=o;0<=h;h--){r=32767;const i=a.__halfDigit(h+g);if(i!==u){const t=(i<<15|a.__halfDigit(h+g-1))>>>0;r=0|t/u;let e=0|t%u;const n=_.__halfDigit(g-2),o=a.__halfDigit(h+g-2);for(;JSBI.__imul(r,n)>>>0>(e<<16|o)>>>0&&(r--,e+=u,!(32767<e)););}JSBI.__internalMultiplyAdd(_,r,0,n,l);let e=a.__inplaceSub(l,h,g+1);0!==e&&(e=a.__inplaceAdd(_,h,g),a.__setHalfDigit(h+g,32767&a.__halfDigit(h+g)+e),r--),t&&(1&h?d=r<<15:s.__setDigit(h>>>1,d|r));}if(e)return a.__inplaceRightShift(r),t?{quotient:s,remainder:a}:a;if(t)return s;throw new Error("unreachable")}static __clz15(i){return JSBI.__clz30(i)-15}__inplaceAdd(_,t,e){let n=0;for(let g=0;g<e;g++){const i=this.__halfDigit(t+g)+_.__halfDigit(g)+n;n=i>>>15,this.__setHalfDigit(t+g,32767&i);}return n}__inplaceSub(_,t,e){let n=0;if(1&t){t>>=1;let g=this.__digit(t),o=32767&g,s=0;for(;s<e-1>>>1;s++){const i=_.__digit(s),e=(g>>>15)-(32767&i)-n;n=1&e>>>15,this.__setDigit(t+s,(32767&e)<<15|32767&o),g=this.__digit(t+s+1),o=(32767&g)-(i>>>15)-n,n=1&o>>>15;}const i=_.__digit(s),l=(g>>>15)-(32767&i)-n;n=1&l>>>15,this.__setDigit(t+s,(32767&l)<<15|32767&o);if(t+s+1>=this.length)throw new RangeError("out of bounds");0==(1&e)&&(g=this.__digit(t+s+1),o=(32767&g)-(i>>>15)-n,n=1&o>>>15,this.__setDigit(t+_.length,1073709056&g|32767&o));}else {t>>=1;let g=0;for(;g<_.length-1;g++){const i=this.__digit(t+g),e=_.__digit(g),o=(32767&i)-(32767&e)-n;n=1&o>>>15;const s=(i>>>15)-(e>>>15)-n;n=1&s>>>15,this.__setDigit(t+g,(32767&s)<<15|32767&o);}const i=this.__digit(t+g),o=_.__digit(g),s=(32767&i)-(32767&o)-n;n=1&s>>>15;let l=0;0==(1&e)&&(l=(i>>>15)-(o>>>15)-n,n=1&l>>>15),this.__setDigit(t+g,(32767&l)<<15|32767&s);}return n}__inplaceRightShift(_){if(0===_)return;let t=this.__digit(0)>>>_;const e=this.length-1;for(let n=0;n<e;n++){const i=this.__digit(n+1);this.__setDigit(n,1073741823&i<<30-_|t),t=i>>>_;}this.__setDigit(e,t);}static __specialLeftShift(_,t,e){const g=_.length,n=new JSBI(g+e,!1);if(0===t){for(let t=0;t<g;t++)n.__setDigit(t,_.__digit(t));return 0<e&&n.__setDigit(g,0),n}let o=0;for(let s=0;s<g;s++){const i=_.__digit(s);n.__setDigit(s,1073741823&i<<t|o),o=i>>>30-t;}return 0<e&&n.__setDigit(g,o),n}static __leftShiftByAbsolute(_,i){const t=JSBI.__toShiftAmount(i);if(0>t)throw new RangeError("BigInt too big");const e=0|t/30,n=t%30,g=_.length,o=0!==n&&0!=_.__digit(g-1)>>>30-n,s=g+e+(o?1:0),l=new JSBI(s,_.sign);if(0===n){let t=0;for(;t<e;t++)l.__setDigit(t,0);for(;t<s;t++)l.__setDigit(t,_.__digit(t-e));}else {let t=0;for(let _=0;_<e;_++)l.__setDigit(_,0);for(let o=0;o<g;o++){const i=_.__digit(o);l.__setDigit(o+e,1073741823&i<<n|t),t=i>>>30-n;}if(o)l.__setDigit(g+e,t);else if(0!==t)throw new Error("implementation bug")}return l.__trim()}static __rightShiftByAbsolute(_,i){const t=_.length,e=_.sign,n=JSBI.__toShiftAmount(i);if(0>n)return JSBI.__rightShiftByMaximum(e);const g=0|n/30,o=n%30;let s=t-g;if(0>=s)return JSBI.__rightShiftByMaximum(e);let l=!1;if(e){if(0!=(_.__digit(g)&(1<<o)-1))l=!0;else for(let t=0;t<g;t++)if(0!==_.__digit(t)){l=!0;break}}if(l&&0===o){const i=_.__digit(t-1);0==~i&&s++;}let r=new JSBI(s,e);if(0===o){r.__setDigit(s-1,0);for(let e=g;e<t;e++)r.__setDigit(e-g,_.__digit(e));}else {let e=_.__digit(g)>>>o;const n=t-g-1;for(let t=0;t<n;t++){const i=_.__digit(t+g+1);r.__setDigit(t,1073741823&i<<30-o|e),e=i>>>o;}r.__setDigit(n,e);}return l&&(r=JSBI.__absoluteAddOne(r,!0,r)),r.__trim()}static __rightShiftByMaximum(i){return i?JSBI.__oneDigit(1,!0):JSBI.__zero()}static __toShiftAmount(i){if(1<i.length)return -1;const _=i.__unsignedDigit(0);return _>JSBI.__kMaxLengthBits?-1:_}static __toPrimitive(i,_="default"){if("object"!=typeof i)return i;if(i.constructor===JSBI)return i;if("undefined"!=typeof Symbol&&"symbol"==typeof Symbol.toPrimitive){const t=i[Symbol.toPrimitive];if(t){const i=t(_);if("object"!=typeof i)return i;throw new TypeError("Cannot convert object to primitive value")}}const t=i.valueOf;if(t){const _=t.call(i);if("object"!=typeof _)return _}const e=i.toString;if(e){const _=e.call(i);if("object"!=typeof _)return _}throw new TypeError("Cannot convert object to primitive value")}static __toNumeric(i){return JSBI.__isBigInt(i)?i:+i}static __isBigInt(i){return "object"==typeof i&&null!==i&&i.constructor===JSBI}static __truncateToNBits(i,_){const t=0|(i+29)/30,e=new JSBI(t,_.sign),n=t-1;for(let t=0;t<n;t++)e.__setDigit(t,_.__digit(t));let g=_.__digit(n);if(0!=i%30){const _=32-i%30;g=g<<_>>>_;}return e.__setDigit(n,g),e.__trim()}static __truncateAndSubFromPowerOfTwo(_,t,e){var n=Math.min;const g=0|(_+29)/30,o=new JSBI(g,e);let s=0;const l=g-1;let a=0;for(const i=n(l,t.length);s<i;s++){const i=0-t.__digit(s)-a;a=1&i>>>30,o.__setDigit(s,1073741823&i);}for(;s<l;s++)o.__setDigit(s,0|1073741823&-a);let u=l<t.length?t.__digit(l):0;const d=_%30;let h;if(0==d)h=0-u-a,h&=1073741823;else {const i=32-d;u=u<<i>>>i;const _=1<<32-i;h=_-u-a,h&=_-1;}return o.__setDigit(l,h),o.__trim()}__digit(_){return this[_]}__unsignedDigit(_){return this[_]>>>0}__setDigit(_,i){this[_]=0|i;}__setDigitGrow(_,i){this[_]=0|i;}__halfDigitLength(){const i=this.length;return 32767>=this.__unsignedDigit(i-1)?2*i-1:2*i}__halfDigit(_){return 32767&this[_>>>1]>>>15*(1&_)}__setHalfDigit(_,i){const t=_>>>1,e=this.__digit(t),n=1&_?32767&e|i<<15:1073709056&e|32767&i;this.__setDigit(t,n);}static __digitPow(i,_){let t=1;for(;0<_;)1&_&&(t*=i),_>>>=1,i*=i;return t}static __isOneDigitInt(i){return (1073741823&i)===i}}JSBI.__kMaxLength=33554432,JSBI.__kMaxLengthBits=JSBI.__kMaxLength<<5,JSBI.__kMaxBitsPerChar=[0,0,32,51,64,75,83,90,96,102,107,111,115,119,122,126,128,131,134,136,139,141,143,145,147,149,151,153,154,156,158,159,160,162,163,165,166],JSBI.__kBitsPerCharTableShift=5,JSBI.__kBitsPerCharTableMultiplier=1<<JSBI.__kBitsPerCharTableShift,JSBI.__kConversionChars=["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"],JSBI.__kBitConversionBuffer=new ArrayBuffer(8),JSBI.__kBitConversionDouble=new Float64Array(JSBI.__kBitConversionBuffer),JSBI.__kBitConversionInts=new Int32Array(JSBI.__kBitConversionBuffer),JSBI.__clz30=Math.clz32?function(i){return Math.clz32(i)-2}:function(i){return 0===i?30:0|29-(0|Math.log(i>>>0)/Math.LN2)},JSBI.__imul=Math.imul||function(i,_){return 0|i*_};
 
-// (public) Constructor
-function BigInteger(a, b, c) {
-  if (!(this instanceof BigInteger))
-    return new BigInteger(a, b, c)
+var jsbi = /*#__PURE__*/Object.freeze({
+	__proto__: null,
+	'default': JSBI
+});
 
-  if (a != null) {
-    if ("number" == typeof a) this.fromNumber(a, b, c);
-    else if (b == null && "string" != typeof a) this.fromString(a, 256);
-    else this.fromString(a, b);
-  }
-}
+var JSBI$1 = /*@__PURE__*/getAugmentedNamespace(jsbi);
 
-var proto = BigInteger.prototype;
+"use strict";
 
-// duck-typed isBigInteger
-proto.__bigi = require$$0.version;
-BigInteger.isBigInteger = function (obj, check_ver) {
-  return obj && obj.__bigi && (!check_ver || obj.__bigi === proto.__bigi)
-};
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
-// Bits per digit
-var dbits;
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-// am: Compute w_j += (x*this_i), propagate carries,
-// c is initial carry, returns final carry.
-// c < 3*dvalue, x < 2*dvalue, this_i < dvalue
-// We need to select the fastest one that works in this environment.
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-// am1: use a single mult and divide to get the high bits,
-// max digit bits should be 26 because
-// max internal value = 2*dvalue^2-2*dvalue (< 2^53)
-function am1(i, x, w, j, c, n) {
-  while (--n >= 0) {
-    var v = x * this[i++] + w[j] + c;
-    c = Math.floor(v / 0x4000000);
-    w[j++] = v & 0x3ffffff;
-  }
-  return c
-}
-// am2 avoids a big mult-and-extract completely.
-// Max digit bits should be <= 30 because we do bitwise ops
-// on values up to 2*hdvalue^2-hdvalue-1 (< 2^31)
-function am2(i, x, w, j, c, n) {
-  var xl = x & 0x7fff,
-    xh = x >> 15;
-  while (--n >= 0) {
-    var l = this[i] & 0x7fff;
-    var h = this[i++] >> 15;
-    var m = xh * l + h * xl;
-    l = xl * l + ((m & 0x7fff) << 15) + w[j] + (c & 0x3fffffff);
-    c = (l >>> 30) + (m >>> 15) + xh * h + (c >>> 30);
-    w[j++] = l & 0x3fffffff;
-  }
-  return c
-}
-// Alternately, set max digit bits to 28 since some
-// browsers slow down when dealing with 32-bit numbers.
-function am3(i, x, w, j, c, n) {
-  var xl = x & 0x3fff,
-    xh = x >> 14;
-  while (--n >= 0) {
-    var l = this[i] & 0x3fff;
-    var h = this[i++] >> 14;
-    var m = xh * l + h * xl;
-    l = xl * l + ((m & 0x3fff) << 14) + w[j] + c;
-    c = (l >> 28) + (m >> 14) + xh * h;
-    w[j++] = l & 0xfffffff;
-  }
-  return c
-}
 
-// wtf?
-BigInteger.prototype.am = am1;
-dbits = 26;
 
-BigInteger.prototype.DB = dbits;
-BigInteger.prototype.DM = ((1 << dbits) - 1);
-var DV = BigInteger.prototype.DV = (1 << dbits);
-
-var BI_FP = 52;
-BigInteger.prototype.FV = Math.pow(2, BI_FP);
-BigInteger.prototype.F1 = BI_FP - dbits;
-BigInteger.prototype.F2 = 2 * dbits - BI_FP;
-
-// Digit conversions
-var BI_RM = "0123456789abcdefghijklmnopqrstuvwxyz";
-var BI_RC = new Array();
-var rr, vv;
-rr = "0".charCodeAt(0);
-for (vv = 0; vv <= 9; ++vv) BI_RC[rr++] = vv;
-rr = "a".charCodeAt(0);
-for (vv = 10; vv < 36; ++vv) BI_RC[rr++] = vv;
-rr = "A".charCodeAt(0);
-for (vv = 10; vv < 36; ++vv) BI_RC[rr++] = vv;
-
-function int2char(n) {
-  return BI_RM.charAt(n)
-}
-
-function intAt(s, i) {
-  var c = BI_RC[s.charCodeAt(i)];
-  return (c == null) ? -1 : c
-}
-
-// (protected) copy this to r
-function bnpCopyTo(r) {
-  for (var i = this.t - 1; i >= 0; --i) r[i] = this[i];
-  r.t = this.t;
-  r.s = this.s;
-}
-
-// (protected) set from integer value x, -DV <= x < DV
-function bnpFromInt(x) {
-  this.t = 1;
-  this.s = (x < 0) ? -1 : 0;
-  if (x > 0) this[0] = x;
-  else if (x < -1) this[0] = x + DV;
-  else this.t = 0;
-}
-
-// return bigint initialized to value
-function nbv(i) {
-  var r = new BigInteger();
-  r.fromInt(i);
-  return r
-}
-
-// (protected) set from string and radix
-function bnpFromString(s, b) {
-  var self = this;
-
-  var k;
-  if (b == 16) k = 4;
-  else if (b == 8) k = 3;
-  else if (b == 256) k = 8; // byte array
-  else if (b == 2) k = 1;
-  else if (b == 32) k = 5;
-  else if (b == 4) k = 2;
-  else {
-    self.fromRadix(s, b);
-    return
-  }
-  self.t = 0;
-  self.s = 0;
-  var i = s.length,
-    mi = false,
-    sh = 0;
-  while (--i >= 0) {
-    var x = (k == 8) ? s[i] & 0xff : intAt(s, i);
-    if (x < 0) {
-      if (s.charAt(i) == "-") mi = true;
-      continue
-    }
-    mi = false;
-    if (sh == 0)
-      self[self.t++] = x;
-    else if (sh + k > self.DB) {
-      self[self.t - 1] |= (x & ((1 << (self.DB - sh)) - 1)) << sh;
-      self[self.t++] = (x >> (self.DB - sh));
-    } else
-      self[self.t - 1] |= x << sh;
-    sh += k;
-    if (sh >= self.DB) sh -= self.DB;
-  }
-  if (k == 8 && (s[0] & 0x80) != 0) {
-    self.s = -1;
-    if (sh > 0) self[self.t - 1] |= ((1 << (self.DB - sh)) - 1) << sh;
-  }
-  self.clamp();
-  if (mi) BigInteger.ZERO.subTo(self, self);
-}
-
-// (protected) clamp off excess high words
-function bnpClamp() {
-  var c = this.s & this.DM;
-  while (this.t > 0 && this[this.t - 1] == c)--this.t;
-}
-
-// (public) return string representation in given radix
-function bnToString(b) {
-  var self = this;
-  if (self.s < 0) return "-" + self.negate()
-    .toString(b)
-  var k;
-  if (b == 16) k = 4;
-  else if (b == 8) k = 3;
-  else if (b == 2) k = 1;
-  else if (b == 32) k = 5;
-  else if (b == 4) k = 2;
-  else return self.toRadix(b)
-  var km = (1 << k) - 1,
-    d, m = false,
-    r = "",
-    i = self.t;
-  var p = self.DB - (i * self.DB) % k;
-  if (i-- > 0) {
-    if (p < self.DB && (d = self[i] >> p) > 0) {
-      m = true;
-      r = int2char(d);
-    }
-    while (i >= 0) {
-      if (p < k) {
-        d = (self[i] & ((1 << p) - 1)) << (k - p);
-        d |= self[--i] >> (p += self.DB - k);
-      } else {
-        d = (self[i] >> (p -= k)) & km;
-        if (p <= 0) {
-          p += self.DB;
-          --i;
-        }
-      }
-      if (d > 0) m = true;
-      if (m) r += int2char(d);
-    }
-  }
-  return m ? r : "0"
-}
-
-// (public) -this
-function bnNegate() {
-  var r = new BigInteger();
-  BigInteger.ZERO.subTo(this, r);
-  return r
-}
-
-// (public) |this|
-function bnAbs() {
-  return (this.s < 0) ? this.negate() : this
-}
-
-// (public) return + if this > a, - if this < a, 0 if equal
-function bnCompareTo(a) {
-  var r = this.s - a.s;
-  if (r != 0) return r
-  var i = this.t;
-  r = i - a.t;
-  if (r != 0) return (this.s < 0) ? -r : r
-  while (--i >= 0)
-    if ((r = this[i] - a[i]) != 0) return r
-  return 0
-}
-
-// returns bit length of the integer x
-function nbits(x) {
-  var r = 1,
-    t;
-  if ((t = x >>> 16) != 0) {
-    x = t;
-    r += 16;
-  }
-  if ((t = x >> 8) != 0) {
-    x = t;
-    r += 8;
-  }
-  if ((t = x >> 4) != 0) {
-    x = t;
-    r += 4;
-  }
-  if ((t = x >> 2) != 0) {
-    x = t;
-    r += 2;
-  }
-  if ((t = x >> 1) != 0) {
-    x = t;
-    r += 1;
-  }
-  return r
-}
-
-// (public) return the number of bits in "this"
-function bnBitLength() {
-  if (this.t <= 0) return 0
-  return this.DB * (this.t - 1) + nbits(this[this.t - 1] ^ (this.s & this.DM))
-}
-
-// (public) return the number of bytes in "this"
-function bnByteLength() {
-  return this.bitLength() >> 3
-}
-
-// (protected) r = this << n*DB
-function bnpDLShiftTo(n, r) {
-  var i;
-  for (i = this.t - 1; i >= 0; --i) r[i + n] = this[i];
-  for (i = n - 1; i >= 0; --i) r[i] = 0;
-  r.t = this.t + n;
-  r.s = this.s;
-}
-
-// (protected) r = this >> n*DB
-function bnpDRShiftTo(n, r) {
-  for (var i = n; i < this.t; ++i) r[i - n] = this[i];
-  r.t = Math.max(this.t - n, 0);
-  r.s = this.s;
-}
-
-// (protected) r = this << n
-function bnpLShiftTo(n, r) {
-  var self = this;
-  var bs = n % self.DB;
-  var cbs = self.DB - bs;
-  var bm = (1 << cbs) - 1;
-  var ds = Math.floor(n / self.DB),
-    c = (self.s << bs) & self.DM,
-    i;
-  for (i = self.t - 1; i >= 0; --i) {
-    r[i + ds + 1] = (self[i] >> cbs) | c;
-    c = (self[i] & bm) << bs;
-  }
-  for (i = ds - 1; i >= 0; --i) r[i] = 0;
-  r[ds] = c;
-  r.t = self.t + ds + 1;
-  r.s = self.s;
-  r.clamp();
-}
-
-// (protected) r = this >> n
-function bnpRShiftTo(n, r) {
-  var self = this;
-  r.s = self.s;
-  var ds = Math.floor(n / self.DB);
-  if (ds >= self.t) {
-    r.t = 0;
-    return
-  }
-  var bs = n % self.DB;
-  var cbs = self.DB - bs;
-  var bm = (1 << bs) - 1;
-  r[0] = self[ds] >> bs;
-  for (var i = ds + 1; i < self.t; ++i) {
-    r[i - ds - 1] |= (self[i] & bm) << cbs;
-    r[i - ds] = self[i] >> bs;
-  }
-  if (bs > 0) r[self.t - ds - 1] |= (self.s & bm) << cbs;
-  r.t = self.t - ds;
-  r.clamp();
-}
-
-// (protected) r = this - a
-function bnpSubTo(a, r) {
-  var self = this;
-  var i = 0,
-    c = 0,
-    m = Math.min(a.t, self.t);
-  while (i < m) {
-    c += self[i] - a[i];
-    r[i++] = c & self.DM;
-    c >>= self.DB;
-  }
-  if (a.t < self.t) {
-    c -= a.s;
-    while (i < self.t) {
-      c += self[i];
-      r[i++] = c & self.DM;
-      c >>= self.DB;
-    }
-    c += self.s;
-  } else {
-    c += self.s;
-    while (i < a.t) {
-      c -= a[i];
-      r[i++] = c & self.DM;
-      c >>= self.DB;
-    }
-    c -= a.s;
-  }
-  r.s = (c < 0) ? -1 : 0;
-  if (c < -1) r[i++] = self.DV + c;
-  else if (c > 0) r[i++] = c;
-  r.t = i;
-  r.clamp();
-}
-
-// (protected) r = this * a, r != this,a (HAC 14.12)
-// "this" should be the larger one if appropriate.
-function bnpMultiplyTo(a, r) {
-  var x = this.abs(),
-    y = a.abs();
-  var i = x.t;
-  r.t = i + y.t;
-  while (--i >= 0) r[i] = 0;
-  for (i = 0; i < y.t; ++i) r[i + x.t] = x.am(0, y[i], r, i, 0, x.t);
-  r.s = 0;
-  r.clamp();
-  if (this.s != a.s) BigInteger.ZERO.subTo(r, r);
-}
-
-// (protected) r = this^2, r != this (HAC 14.16)
-function bnpSquareTo(r) {
-  var x = this.abs();
-  var i = r.t = 2 * x.t;
-  while (--i >= 0) r[i] = 0;
-  for (i = 0; i < x.t - 1; ++i) {
-    var c = x.am(i, x[i], r, 2 * i, 0, 1);
-    if ((r[i + x.t] += x.am(i + 1, 2 * x[i], r, 2 * i + 1, c, x.t - i - 1)) >= x.DV) {
-      r[i + x.t] -= x.DV;
-      r[i + x.t + 1] = 1;
-    }
-  }
-  if (r.t > 0) r[r.t - 1] += x.am(i, x[i], r, 2 * i, 0, 1);
-  r.s = 0;
-  r.clamp();
-}
-
-// (protected) divide this by m, quotient and remainder to q, r (HAC 14.20)
-// r != q, this != m.  q or r may be null.
-function bnpDivRemTo(m, q, r) {
-  var self = this;
-  var pm = m.abs();
-  if (pm.t <= 0) return
-  var pt = self.abs();
-  if (pt.t < pm.t) {
-    if (q != null) q.fromInt(0);
-    if (r != null) self.copyTo(r);
-    return
-  }
-  if (r == null) r = new BigInteger();
-  var y = new BigInteger(),
-    ts = self.s,
-    ms = m.s;
-  var nsh = self.DB - nbits(pm[pm.t - 1]); // normalize modulus
-  if (nsh > 0) {
-    pm.lShiftTo(nsh, y);
-    pt.lShiftTo(nsh, r);
-  } else {
-    pm.copyTo(y);
-    pt.copyTo(r);
-  }
-  var ys = y.t;
-  var y0 = y[ys - 1];
-  if (y0 == 0) return
-  var yt = y0 * (1 << self.F1) + ((ys > 1) ? y[ys - 2] >> self.F2 : 0);
-  var d1 = self.FV / yt,
-    d2 = (1 << self.F1) / yt,
-    e = 1 << self.F2;
-  var i = r.t,
-    j = i - ys,
-    t = (q == null) ? new BigInteger() : q;
-  y.dlShiftTo(j, t);
-  if (r.compareTo(t) >= 0) {
-    r[r.t++] = 1;
-    r.subTo(t, r);
-  }
-  BigInteger.ONE.dlShiftTo(ys, t);
-  t.subTo(y, y); // "negative" y so we can replace sub with am later
-  while (y.t < ys) y[y.t++] = 0;
-  while (--j >= 0) {
-    // Estimate quotient digit
-    var qd = (r[--i] == y0) ? self.DM : Math.floor(r[i] * d1 + (r[i - 1] + e) * d2);
-    if ((r[i] += y.am(0, qd, r, j, 0, ys)) < qd) { // Try it out
-      y.dlShiftTo(j, t);
-      r.subTo(t, r);
-      while (r[i] < --qd) r.subTo(t, r);
-    }
-  }
-  if (q != null) {
-    r.drShiftTo(ys, q);
-    if (ts != ms) BigInteger.ZERO.subTo(q, q);
-  }
-  r.t = ys;
-  r.clamp();
-  if (nsh > 0) r.rShiftTo(nsh, r); // Denormalize remainder
-  if (ts < 0) BigInteger.ZERO.subTo(r, r);
-}
-
-// (public) this mod a
-function bnMod(a) {
-  var r = new BigInteger();
-  this.abs()
-    .divRemTo(a, null, r);
-  if (this.s < 0 && r.compareTo(BigInteger.ZERO) > 0) a.subTo(r, r);
-  return r
-}
-
-// Modular reduction using "classic" algorithm
-function Classic(m) {
-  this.m = m;
-}
-
-function cConvert(x) {
-  if (x.s < 0 || x.compareTo(this.m) >= 0) return x.mod(this.m)
-  else return x
-}
-
-function cRevert(x) {
-  return x
-}
-
-function cReduce(x) {
-  x.divRemTo(this.m, null, x);
-}
-
-function cMulTo(x, y, r) {
-  x.multiplyTo(y, r);
-  this.reduce(r);
-}
-
-function cSqrTo(x, r) {
-  x.squareTo(r);
-  this.reduce(r);
-}
-
-Classic.prototype.convert = cConvert;
-Classic.prototype.revert = cRevert;
-Classic.prototype.reduce = cReduce;
-Classic.prototype.mulTo = cMulTo;
-Classic.prototype.sqrTo = cSqrTo;
-
-// (protected) return "-1/this % 2^DB"; useful for Mont. reduction
-// justification:
-//         xy == 1 (mod m)
-//         xy =  1+km
-//   xy(2-xy) = (1+km)(1-km)
-// x[y(2-xy)] = 1-k^2m^2
-// x[y(2-xy)] == 1 (mod m^2)
-// if y is 1/x mod m, then y(2-xy) is 1/x mod m^2
-// should reduce x and y(2-xy) by m^2 at each step to keep size bounded.
-// JS multiply "overflows" differently from C/C++, so care is needed here.
-function bnpInvDigit() {
-  if (this.t < 1) return 0
-  var x = this[0];
-  if ((x & 1) == 0) return 0
-  var y = x & 3; // y == 1/x mod 2^2
-  y = (y * (2 - (x & 0xf) * y)) & 0xf; // y == 1/x mod 2^4
-  y = (y * (2 - (x & 0xff) * y)) & 0xff; // y == 1/x mod 2^8
-  y = (y * (2 - (((x & 0xffff) * y) & 0xffff))) & 0xffff; // y == 1/x mod 2^16
-  // last step - calculate inverse mod DV directly
-  // assumes 16 < DB <= 32 and assumes ability to handle 48-bit ints
-  y = (y * (2 - x * y % this.DV)) % this.DV; // y == 1/x mod 2^dbits
-  // we really want the negative inverse, and -DV < y < DV
-  return (y > 0) ? this.DV - y : -y
-}
-
-// Montgomery reduction
-function Montgomery(m) {
-  this.m = m;
-  this.mp = m.invDigit();
-  this.mpl = this.mp & 0x7fff;
-  this.mph = this.mp >> 15;
-  this.um = (1 << (m.DB - 15)) - 1;
-  this.mt2 = 2 * m.t;
-}
-
-// xR mod m
-function montConvert(x) {
-  var r = new BigInteger();
-  x.abs()
-    .dlShiftTo(this.m.t, r);
-  r.divRemTo(this.m, null, r);
-  if (x.s < 0 && r.compareTo(BigInteger.ZERO) > 0) this.m.subTo(r, r);
-  return r
-}
-
-// x/R mod m
-function montRevert(x) {
-  var r = new BigInteger();
-  x.copyTo(r);
-  this.reduce(r);
-  return r
-}
-
-// x = x/R mod m (HAC 14.32)
-function montReduce(x) {
-  while (x.t <= this.mt2) // pad x so am has enough room later
-    x[x.t++] = 0;
-  for (var i = 0; i < this.m.t; ++i) {
-    // faster way of calculating u0 = x[i]*mp mod DV
-    var j = x[i] & 0x7fff;
-    var u0 = (j * this.mpl + (((j * this.mph + (x[i] >> 15) * this.mpl) & this.um) << 15)) & x.DM;
-    // use am to combine the multiply-shift-add into one call
-    j = i + this.m.t;
-    x[j] += this.m.am(0, u0, x, i, 0, this.m.t);
-    // propagate carry
-    while (x[j] >= x.DV) {
-      x[j] -= x.DV;
-      x[++j]++;
-    }
-  }
-  x.clamp();
-  x.drShiftTo(this.m.t, x);
-  if (x.compareTo(this.m) >= 0) x.subTo(this.m, x);
-}
-
-// r = "x^2/R mod m"; x != r
-function montSqrTo(x, r) {
-  x.squareTo(r);
-  this.reduce(r);
-}
-
-// r = "xy/R mod m"; x,y != r
-function montMulTo(x, y, r) {
-  x.multiplyTo(y, r);
-  this.reduce(r);
-}
-
-Montgomery.prototype.convert = montConvert;
-Montgomery.prototype.revert = montRevert;
-Montgomery.prototype.reduce = montReduce;
-Montgomery.prototype.mulTo = montMulTo;
-Montgomery.prototype.sqrTo = montSqrTo;
-
-// (protected) true iff this is even
-function bnpIsEven() {
-  return ((this.t > 0) ? (this[0] & 1) : this.s) == 0
-}
-
-// (protected) this^e, e < 2^32, doing sqr and mul with "r" (HAC 14.79)
-function bnpExp(e, z) {
-  if (e > 0xffffffff || e < 1) return BigInteger.ONE
-  var r = new BigInteger(),
-    r2 = new BigInteger(),
-    g = z.convert(this),
-    i = nbits(e) - 1;
-  g.copyTo(r);
-  while (--i >= 0) {
-    z.sqrTo(r, r2);
-    if ((e & (1 << i)) > 0) z.mulTo(r2, g, r);
-    else {
-      var t = r;
-      r = r2;
-      r2 = t;
-    }
-  }
-  return z.revert(r)
-}
-
-// (public) this^e % m, 0 <= e < 2^32
-function bnModPowInt(e, m) {
-  var z;
-  if (e < 256 || m.isEven()) z = new Classic(m);
-  else z = new Montgomery(m);
-  return this.exp(e, z)
-}
-
-// protected
-proto.copyTo = bnpCopyTo;
-proto.fromInt = bnpFromInt;
-proto.fromString = bnpFromString;
-proto.clamp = bnpClamp;
-proto.dlShiftTo = bnpDLShiftTo;
-proto.drShiftTo = bnpDRShiftTo;
-proto.lShiftTo = bnpLShiftTo;
-proto.rShiftTo = bnpRShiftTo;
-proto.subTo = bnpSubTo;
-proto.multiplyTo = bnpMultiplyTo;
-proto.squareTo = bnpSquareTo;
-proto.divRemTo = bnpDivRemTo;
-proto.invDigit = bnpInvDigit;
-proto.isEven = bnpIsEven;
-proto.exp = bnpExp;
-
-// public
-proto.toString = bnToString;
-proto.negate = bnNegate;
-proto.abs = bnAbs;
-proto.compareTo = bnCompareTo;
-proto.bitLength = bnBitLength;
-proto.byteLength = bnByteLength;
-proto.mod = bnMod;
-proto.modPowInt = bnModPowInt;
-
-// (public)
-function bnClone() {
-  var r = new BigInteger();
-  this.copyTo(r);
-  return r
-}
-
-// (public) return value as integer
-function bnIntValue() {
-  if (this.s < 0) {
-    if (this.t == 1) return this[0] - this.DV
-    else if (this.t == 0) return -1
-  } else if (this.t == 1) return this[0]
-  else if (this.t == 0) return 0
-  // assumes 16 < DB < 32
-  return ((this[1] & ((1 << (32 - this.DB)) - 1)) << this.DB) | this[0]
-}
-
-// (public) return value as byte
-function bnByteValue() {
-  return (this.t == 0) ? this.s : (this[0] << 24) >> 24
-}
-
-// (public) return value as short (assumes DB>=16)
-function bnShortValue() {
-  return (this.t == 0) ? this.s : (this[0] << 16) >> 16
-}
-
-// (protected) return x s.t. r^x < DV
-function bnpChunkSize(r) {
-  return Math.floor(Math.LN2 * this.DB / Math.log(r))
-}
-
-// (public) 0 if this == 0, 1 if this > 0
-function bnSigNum() {
-  if (this.s < 0) return -1
-  else if (this.t <= 0 || (this.t == 1 && this[0] <= 0)) return 0
-  else return 1
-}
-
-// (protected) convert to radix string
-function bnpToRadix(b) {
-  if (b == null) b = 10;
-  if (this.signum() == 0 || b < 2 || b > 36) return "0"
-  var cs = this.chunkSize(b);
-  var a = Math.pow(b, cs);
-  var d = nbv(a),
-    y = new BigInteger(),
-    z = new BigInteger(),
-    r = "";
-  this.divRemTo(d, y, z);
-  while (y.signum() > 0) {
-    r = (a + z.intValue())
-      .toString(b)
-      .substr(1) + r;
-    y.divRemTo(d, y, z);
-  }
-  return z.intValue()
-    .toString(b) + r
-}
-
-// (protected) convert from radix string
-function bnpFromRadix(s, b) {
-  var self = this;
-  self.fromInt(0);
-  if (b == null) b = 10;
-  var cs = self.chunkSize(b);
-  var d = Math.pow(b, cs),
-    mi = false,
-    j = 0,
-    w = 0;
-  for (var i = 0; i < s.length; ++i) {
-    var x = intAt(s, i);
-    if (x < 0) {
-      if (s.charAt(i) == "-" && self.signum() == 0) mi = true;
-      continue
-    }
-    w = b * w + x;
-    if (++j >= cs) {
-      self.dMultiply(d);
-      self.dAddOffset(w, 0);
-      j = 0;
-      w = 0;
-    }
-  }
-  if (j > 0) {
-    self.dMultiply(Math.pow(b, j));
-    self.dAddOffset(w, 0);
-  }
-  if (mi) BigInteger.ZERO.subTo(self, self);
-}
-
-// (protected) alternate constructor
-function bnpFromNumber(a, b, c) {
-  var self = this;
-  if ("number" == typeof b) {
-    // new BigInteger(int,int,RNG)
-    if (a < 2) self.fromInt(1);
-    else {
-      self.fromNumber(a, c);
-      if (!self.testBit(a - 1)) // force MSB set
-        self.bitwiseTo(BigInteger.ONE.shiftLeft(a - 1), op_or, self);
-      if (self.isEven()) self.dAddOffset(1, 0); // force odd
-      while (!self.isProbablePrime(b)) {
-        self.dAddOffset(2, 0);
-        if (self.bitLength() > a) self.subTo(BigInteger.ONE.shiftLeft(a - 1), self);
-      }
-    }
-  } else {
-    // new BigInteger(int,RNG)
-    var x = new Array(),
-      t = a & 7;
-    x.length = (a >> 3) + 1;
-    b.nextBytes(x);
-    if (t > 0) x[0] &= ((1 << t) - 1);
-    else x[0] = 0;
-    self.fromString(x, 256);
-  }
-}
-
-// (public) convert to bigendian byte array
-function bnToByteArray() {
-  var self = this;
-  var i = self.t,
-    r = new Array();
-  r[0] = self.s;
-  var p = self.DB - (i * self.DB) % 8,
-    d, k = 0;
-  if (i-- > 0) {
-    if (p < self.DB && (d = self[i] >> p) != (self.s & self.DM) >> p)
-      r[k++] = d | (self.s << (self.DB - p));
-    while (i >= 0) {
-      if (p < 8) {
-        d = (self[i] & ((1 << p) - 1)) << (8 - p);
-        d |= self[--i] >> (p += self.DB - 8);
-      } else {
-        d = (self[i] >> (p -= 8)) & 0xff;
-        if (p <= 0) {
-          p += self.DB;
-          --i;
-        }
-      }
-      if ((d & 0x80) != 0) d |= -256;
-      if (k === 0 && (self.s & 0x80) != (d & 0x80))++k;
-      if (k > 0 || d != self.s) r[k++] = d;
-    }
-  }
-  return r
-}
-
-function bnEquals(a) {
-  return (this.compareTo(a) == 0)
-}
-
-function bnMin(a) {
-  return (this.compareTo(a) < 0) ? this : a
-}
-
-function bnMax(a) {
-  return (this.compareTo(a) > 0) ? this : a
-}
-
-// (protected) r = this op a (bitwise)
-function bnpBitwiseTo(a, op, r) {
-  var self = this;
-  var i, f, m = Math.min(a.t, self.t);
-  for (i = 0; i < m; ++i) r[i] = op(self[i], a[i]);
-  if (a.t < self.t) {
-    f = a.s & self.DM;
-    for (i = m; i < self.t; ++i) r[i] = op(self[i], f);
-    r.t = self.t;
-  } else {
-    f = self.s & self.DM;
-    for (i = m; i < a.t; ++i) r[i] = op(f, a[i]);
-    r.t = a.t;
-  }
-  r.s = op(self.s, a.s);
-  r.clamp();
-}
-
-// (public) this & a
-function op_and(x, y) {
-  return x & y
-}
-
-function bnAnd(a) {
-  var r = new BigInteger();
-  this.bitwiseTo(a, op_and, r);
-  return r
-}
-
-// (public) this | a
-function op_or(x, y) {
-  return x | y
-}
-
-function bnOr(a) {
-  var r = new BigInteger();
-  this.bitwiseTo(a, op_or, r);
-  return r
-}
-
-// (public) this ^ a
-function op_xor(x, y) {
-  return x ^ y
-}
-
-function bnXor(a) {
-  var r = new BigInteger();
-  this.bitwiseTo(a, op_xor, r);
-  return r
-}
-
-// (public) this & ~a
-function op_andnot(x, y) {
-  return x & ~y
-}
-
-function bnAndNot(a) {
-  var r = new BigInteger();
-  this.bitwiseTo(a, op_andnot, r);
-  return r
-}
-
-// (public) ~this
-function bnNot() {
-  var r = new BigInteger();
-  for (var i = 0; i < this.t; ++i) r[i] = this.DM & ~this[i];
-  r.t = this.t;
-  r.s = ~this.s;
-  return r
-}
-
-// (public) this << n
-function bnShiftLeft(n) {
-  var r = new BigInteger();
-  if (n < 0) this.rShiftTo(-n, r);
-  else this.lShiftTo(n, r);
-  return r
-}
-
-// (public) this >> n
-function bnShiftRight(n) {
-  var r = new BigInteger();
-  if (n < 0) this.lShiftTo(-n, r);
-  else this.rShiftTo(n, r);
-  return r
-}
-
-// return index of lowest 1-bit in x, x < 2^31
-function lbit(x) {
-  if (x == 0) return -1
-  var r = 0;
-  if ((x & 0xffff) == 0) {
-    x >>= 16;
-    r += 16;
-  }
-  if ((x & 0xff) == 0) {
-    x >>= 8;
-    r += 8;
-  }
-  if ((x & 0xf) == 0) {
-    x >>= 4;
-    r += 4;
-  }
-  if ((x & 3) == 0) {
-    x >>= 2;
-    r += 2;
-  }
-  if ((x & 1) == 0)++r;
-  return r
-}
-
-// (public) returns index of lowest 1-bit (or -1 if none)
-function bnGetLowestSetBit() {
-  for (var i = 0; i < this.t; ++i)
-    if (this[i] != 0) return i * this.DB + lbit(this[i])
-  if (this.s < 0) return this.t * this.DB
-  return -1
-}
-
-// return number of 1 bits in x
-function cbit(x) {
-  var r = 0;
-  while (x != 0) {
-    x &= x - 1;
-    ++r;
-  }
-  return r
-}
-
-// (public) return number of set bits
-function bnBitCount() {
-  var r = 0,
-    x = this.s & this.DM;
-  for (var i = 0; i < this.t; ++i) r += cbit(this[i] ^ x);
-  return r
-}
-
-// (public) true iff nth bit is set
-function bnTestBit(n) {
-  var j = Math.floor(n / this.DB);
-  if (j >= this.t) return (this.s != 0)
-  return ((this[j] & (1 << (n % this.DB))) != 0)
-}
-
-// (protected) this op (1<<n)
-function bnpChangeBit(n, op) {
-  var r = BigInteger.ONE.shiftLeft(n);
-  this.bitwiseTo(r, op, r);
-  return r
-}
-
-// (public) this | (1<<n)
-function bnSetBit(n) {
-  return this.changeBit(n, op_or)
-}
-
-// (public) this & ~(1<<n)
-function bnClearBit(n) {
-  return this.changeBit(n, op_andnot)
-}
-
-// (public) this ^ (1<<n)
-function bnFlipBit(n) {
-  return this.changeBit(n, op_xor)
-}
-
-// (protected) r = this + a
-function bnpAddTo(a, r) {
-  var self = this;
-
-  var i = 0,
-    c = 0,
-    m = Math.min(a.t, self.t);
-  while (i < m) {
-    c += self[i] + a[i];
-    r[i++] = c & self.DM;
-    c >>= self.DB;
-  }
-  if (a.t < self.t) {
-    c += a.s;
-    while (i < self.t) {
-      c += self[i];
-      r[i++] = c & self.DM;
-      c >>= self.DB;
-    }
-    c += self.s;
-  } else {
-    c += self.s;
-    while (i < a.t) {
-      c += a[i];
-      r[i++] = c & self.DM;
-      c >>= self.DB;
-    }
-    c += a.s;
-  }
-  r.s = (c < 0) ? -1 : 0;
-  if (c > 0) r[i++] = c;
-  else if (c < -1) r[i++] = self.DV + c;
-  r.t = i;
-  r.clamp();
-}
-
-// (public) this + a
-function bnAdd(a) {
-  var r = new BigInteger();
-  this.addTo(a, r);
-  return r
-}
-
-// (public) this - a
-function bnSubtract(a) {
-  var r = new BigInteger();
-  this.subTo(a, r);
-  return r
-}
-
-// (public) this * a
-function bnMultiply(a) {
-  var r = new BigInteger();
-  this.multiplyTo(a, r);
-  return r
-}
-
-// (public) this^2
-function bnSquare() {
-  var r = new BigInteger();
-  this.squareTo(r);
-  return r
-}
-
-// (public) this / a
-function bnDivide(a) {
-  var r = new BigInteger();
-  this.divRemTo(a, r, null);
-  return r
-}
-
-// (public) this % a
-function bnRemainder(a) {
-  var r = new BigInteger();
-  this.divRemTo(a, null, r);
-  return r
-}
-
-// (public) [this/a,this%a]
-function bnDivideAndRemainder(a) {
-  var q = new BigInteger(),
-    r = new BigInteger();
-  this.divRemTo(a, q, r);
-  return new Array(q, r)
-}
-
-// (protected) this *= n, this >= 0, 1 < n < DV
-function bnpDMultiply(n) {
-  this[this.t] = this.am(0, n - 1, this, 0, 0, this.t);
-  ++this.t;
-  this.clamp();
-}
-
-// (protected) this += n << w words, this >= 0
-function bnpDAddOffset(n, w) {
-  if (n == 0) return
-  while (this.t <= w) this[this.t++] = 0;
-  this[w] += n;
-  while (this[w] >= this.DV) {
-    this[w] -= this.DV;
-    if (++w >= this.t) this[this.t++] = 0;
-    ++this[w];
-  }
-}
-
-// A "null" reducer
-function NullExp() {}
-
-function nNop(x) {
-  return x
-}
-
-function nMulTo(x, y, r) {
-  x.multiplyTo(y, r);
-}
-
-function nSqrTo(x, r) {
-  x.squareTo(r);
-}
-
-NullExp.prototype.convert = nNop;
-NullExp.prototype.revert = nNop;
-NullExp.prototype.mulTo = nMulTo;
-NullExp.prototype.sqrTo = nSqrTo;
-
-// (public) this^e
-function bnPow(e) {
-  return this.exp(e, new NullExp())
-}
-
-// (protected) r = lower n words of "this * a", a.t <= n
-// "this" should be the larger one if appropriate.
-function bnpMultiplyLowerTo(a, n, r) {
-  var i = Math.min(this.t + a.t, n);
-  r.s = 0; // assumes a,this >= 0
-  r.t = i;
-  while (i > 0) r[--i] = 0;
-  var j;
-  for (j = r.t - this.t; i < j; ++i) r[i + this.t] = this.am(0, a[i], r, i, 0, this.t);
-  for (j = Math.min(a.t, n); i < j; ++i) this.am(0, a[i], r, i, 0, n - i);
-  r.clamp();
-}
-
-// (protected) r = "this * a" without lower n words, n > 0
-// "this" should be the larger one if appropriate.
-function bnpMultiplyUpperTo(a, n, r) {
-  --n;
-  var i = r.t = this.t + a.t - n;
-  r.s = 0; // assumes a,this >= 0
-  while (--i >= 0) r[i] = 0;
-  for (i = Math.max(n - this.t, 0); i < a.t; ++i)
-    r[this.t + i - n] = this.am(n - i, a[i], r, 0, 0, this.t + i - n);
-  r.clamp();
-  r.drShiftTo(1, r);
-}
-
-// Barrett modular reduction
-function Barrett(m) {
-  // setup Barrett
-  this.r2 = new BigInteger();
-  this.q3 = new BigInteger();
-  BigInteger.ONE.dlShiftTo(2 * m.t, this.r2);
-  this.mu = this.r2.divide(m);
-  this.m = m;
-}
-
-function barrettConvert(x) {
-  if (x.s < 0 || x.t > 2 * this.m.t) return x.mod(this.m)
-  else if (x.compareTo(this.m) < 0) return x
-  else {
-    var r = new BigInteger();
-    x.copyTo(r);
-    this.reduce(r);
-    return r
-  }
-}
-
-function barrettRevert(x) {
-  return x
-}
-
-// x = x mod m (HAC 14.42)
-function barrettReduce(x) {
-  var self = this;
-  x.drShiftTo(self.m.t - 1, self.r2);
-  if (x.t > self.m.t + 1) {
-    x.t = self.m.t + 1;
-    x.clamp();
-  }
-  self.mu.multiplyUpperTo(self.r2, self.m.t + 1, self.q3);
-  self.m.multiplyLowerTo(self.q3, self.m.t + 1, self.r2);
-  while (x.compareTo(self.r2) < 0) x.dAddOffset(1, self.m.t + 1);
-  x.subTo(self.r2, x);
-  while (x.compareTo(self.m) >= 0) x.subTo(self.m, x);
-}
-
-// r = x^2 mod m; x != r
-function barrettSqrTo(x, r) {
-  x.squareTo(r);
-  this.reduce(r);
-}
-
-// r = x*y mod m; x,y != r
-function barrettMulTo(x, y, r) {
-  x.multiplyTo(y, r);
-  this.reduce(r);
-}
-
-Barrett.prototype.convert = barrettConvert;
-Barrett.prototype.revert = barrettRevert;
-Barrett.prototype.reduce = barrettReduce;
-Barrett.prototype.mulTo = barrettMulTo;
-Barrett.prototype.sqrTo = barrettSqrTo;
-
-// (public) this^e % m (HAC 14.85)
-function bnModPow(e, m) {
-  var i = e.bitLength(),
-    k, r = nbv(1),
-    z;
-  if (i <= 0) return r
-  else if (i < 18) k = 1;
-  else if (i < 48) k = 3;
-  else if (i < 144) k = 4;
-  else if (i < 768) k = 5;
-  else k = 6;
-  if (i < 8)
-    z = new Classic(m);
-  else if (m.isEven())
-    z = new Barrett(m);
-  else
-    z = new Montgomery(m);
-
-  // precomputation
-  var g = new Array(),
-    n = 3,
-    k1 = k - 1,
-    km = (1 << k) - 1;
-  g[1] = z.convert(this);
-  if (k > 1) {
-    var g2 = new BigInteger();
-    z.sqrTo(g[1], g2);
-    while (n <= km) {
-      g[n] = new BigInteger();
-      z.mulTo(g2, g[n - 2], g[n]);
-      n += 2;
-    }
-  }
-
-  var j = e.t - 1,
-    w, is1 = true,
-    r2 = new BigInteger(),
-    t;
-  i = nbits(e[j]) - 1;
-  while (j >= 0) {
-    if (i >= k1) w = (e[j] >> (i - k1)) & km;
-    else {
-      w = (e[j] & ((1 << (i + 1)) - 1)) << (k1 - i);
-      if (j > 0) w |= e[j - 1] >> (this.DB + i - k1);
-    }
-
-    n = k;
-    while ((w & 1) == 0) {
-      w >>= 1;
-      --n;
-    }
-    if ((i -= n) < 0) {
-      i += this.DB;
-      --j;
-    }
-    if (is1) { // ret == 1, don't bother squaring or multiplying it
-      g[w].copyTo(r);
-      is1 = false;
-    } else {
-      while (n > 1) {
-        z.sqrTo(r, r2);
-        z.sqrTo(r2, r);
-        n -= 2;
-      }
-      if (n > 0) z.sqrTo(r, r2);
-      else {
-        t = r;
-        r = r2;
-        r2 = t;
-      }
-      z.mulTo(r2, g[w], r);
-    }
-
-    while (j >= 0 && (e[j] & (1 << i)) == 0) {
-      z.sqrTo(r, r2);
-      t = r;
-      r = r2;
-      r2 = t;
-      if (--i < 0) {
-        i = this.DB - 1;
-        --j;
-      }
-    }
-  }
-  return z.revert(r)
-}
-
-// (public) gcd(this,a) (HAC 14.54)
-function bnGCD(a) {
-  var x = (this.s < 0) ? this.negate() : this.clone();
-  var y = (a.s < 0) ? a.negate() : a.clone();
-  if (x.compareTo(y) < 0) {
-    var t = x;
-    x = y;
-    y = t;
-  }
-  var i = x.getLowestSetBit(),
-    g = y.getLowestSetBit();
-  if (g < 0) return x
-  if (i < g) g = i;
-  if (g > 0) {
-    x.rShiftTo(g, x);
-    y.rShiftTo(g, y);
-  }
-  while (x.signum() > 0) {
-    if ((i = x.getLowestSetBit()) > 0) x.rShiftTo(i, x);
-    if ((i = y.getLowestSetBit()) > 0) y.rShiftTo(i, y);
-    if (x.compareTo(y) >= 0) {
-      x.subTo(y, x);
-      x.rShiftTo(1, x);
-    } else {
-      y.subTo(x, y);
-      y.rShiftTo(1, y);
-    }
-  }
-  if (g > 0) y.lShiftTo(g, y);
-  return y
-}
-
-// (protected) this % n, n < 2^26
-function bnpModInt(n) {
-  if (n <= 0) return 0
-  var d = this.DV % n,
-    r = (this.s < 0) ? n - 1 : 0;
-  if (this.t > 0)
-    if (d == 0) r = this[0] % n;
-    else
-      for (var i = this.t - 1; i >= 0; --i) r = (d * r + this[i]) % n;
-  return r
-}
-
-// (public) 1/this % m (HAC 14.61)
-function bnModInverse(m) {
-  var ac = m.isEven();
-  if (this.signum() === 0) throw new Error('division by zero')
-  if ((this.isEven() && ac) || m.signum() == 0) return BigInteger.ZERO
-  var u = m.clone(),
-    v = this.clone();
-  var a = nbv(1),
-    b = nbv(0),
-    c = nbv(0),
-    d = nbv(1);
-  while (u.signum() != 0) {
-    while (u.isEven()) {
-      u.rShiftTo(1, u);
-      if (ac) {
-        if (!a.isEven() || !b.isEven()) {
-          a.addTo(this, a);
-          b.subTo(m, b);
-        }
-        a.rShiftTo(1, a);
-      } else if (!b.isEven()) b.subTo(m, b);
-      b.rShiftTo(1, b);
-    }
-    while (v.isEven()) {
-      v.rShiftTo(1, v);
-      if (ac) {
-        if (!c.isEven() || !d.isEven()) {
-          c.addTo(this, c);
-          d.subTo(m, d);
-        }
-        c.rShiftTo(1, c);
-      } else if (!d.isEven()) d.subTo(m, d);
-      d.rShiftTo(1, d);
-    }
-    if (u.compareTo(v) >= 0) {
-      u.subTo(v, u);
-      if (ac) a.subTo(c, a);
-      b.subTo(d, b);
-    } else {
-      v.subTo(u, v);
-      if (ac) c.subTo(a, c);
-      d.subTo(b, d);
-    }
-  }
-  if (v.compareTo(BigInteger.ONE) != 0) return BigInteger.ZERO
-  while (d.compareTo(m) >= 0) d.subTo(m, d);
-  while (d.signum() < 0) d.addTo(m, d);
-  return d
-}
-
-var lowprimes = [
-  2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
-  73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151,
-  157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233,
-  239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317,
-  331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419,
-  421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503,
-  509, 521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607,
-  613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691, 701,
-  709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797, 809, 811,
-  821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911,
-  919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997
-];
-
-var lplim = (1 << 26) / lowprimes[lowprimes.length - 1];
-
-// (public) test primality with certainty >= 1-.5^t
-function bnIsProbablePrime(t) {
-  var i, x = this.abs();
-  if (x.t == 1 && x[0] <= lowprimes[lowprimes.length - 1]) {
-    for (i = 0; i < lowprimes.length; ++i)
-      if (x[0] == lowprimes[i]) return true
-    return false
-  }
-  if (x.isEven()) return false
-  i = 1;
-  while (i < lowprimes.length) {
-    var m = lowprimes[i],
-      j = i + 1;
-    while (j < lowprimes.length && m < lplim) m *= lowprimes[j++];
-    m = x.modInt(m);
-    while (i < j) if (m % lowprimes[i++] == 0) return false
-  }
-  return x.millerRabin(t)
-}
-
-// (protected) true if probably prime (HAC 4.24, Miller-Rabin)
-function bnpMillerRabin(t) {
-  var n1 = this.subtract(BigInteger.ONE);
-  var k = n1.getLowestSetBit();
-  if (k <= 0) return false
-  var r = n1.shiftRight(k);
-  t = (t + 1) >> 1;
-  if (t > lowprimes.length) t = lowprimes.length;
-  var a = new BigInteger(null);
-  var j, bases = [];
-  for (var i = 0; i < t; ++i) {
-    for (;;) {
-      j = lowprimes[Math.floor(Math.random() * lowprimes.length)];
-      if (bases.indexOf(j) == -1) break
-    }
-    bases.push(j);
-    a.fromInt(j);
-    var y = a.modPow(r, this);
-    if (y.compareTo(BigInteger.ONE) != 0 && y.compareTo(n1) != 0) {
-      var j = 1;
-      while (j++ < k && y.compareTo(n1) != 0) {
-        y = y.modPowInt(2, this);
-        if (y.compareTo(BigInteger.ONE) == 0) return false
-      }
-      if (y.compareTo(n1) != 0) return false
-    }
-  }
-  return true
-}
-
-// protected
-proto.chunkSize = bnpChunkSize;
-proto.toRadix = bnpToRadix;
-proto.fromRadix = bnpFromRadix;
-proto.fromNumber = bnpFromNumber;
-proto.bitwiseTo = bnpBitwiseTo;
-proto.changeBit = bnpChangeBit;
-proto.addTo = bnpAddTo;
-proto.dMultiply = bnpDMultiply;
-proto.dAddOffset = bnpDAddOffset;
-proto.multiplyLowerTo = bnpMultiplyLowerTo;
-proto.multiplyUpperTo = bnpMultiplyUpperTo;
-proto.modInt = bnpModInt;
-proto.millerRabin = bnpMillerRabin;
-
-// public
-proto.clone = bnClone;
-proto.intValue = bnIntValue;
-proto.byteValue = bnByteValue;
-proto.shortValue = bnShortValue;
-proto.signum = bnSigNum;
-proto.toByteArray = bnToByteArray;
-proto.equals = bnEquals;
-proto.min = bnMin;
-proto.max = bnMax;
-proto.and = bnAnd;
-proto.or = bnOr;
-proto.xor = bnXor;
-proto.andNot = bnAndNot;
-proto.not = bnNot;
-proto.shiftLeft = bnShiftLeft;
-proto.shiftRight = bnShiftRight;
-proto.getLowestSetBit = bnGetLowestSetBit;
-proto.bitCount = bnBitCount;
-proto.testBit = bnTestBit;
-proto.setBit = bnSetBit;
-proto.clearBit = bnClearBit;
-proto.flipBit = bnFlipBit;
-proto.add = bnAdd;
-proto.subtract = bnSubtract;
-proto.multiply = bnMultiply;
-proto.divide = bnDivide;
-proto.remainder = bnRemainder;
-proto.divideAndRemainder = bnDivideAndRemainder;
-proto.modPow = bnModPow;
-proto.modInverse = bnModInverse;
-proto.pow = bnPow;
-proto.gcd = bnGCD;
-proto.isProbablePrime = bnIsProbablePrime;
-
-// JSBN-specific extension
-proto.square = bnSquare;
-
-// constants
-BigInteger.ZERO = nbv(0);
-BigInteger.ONE = nbv(1);
-BigInteger.valueOf = nbv;
-
-var bigi = BigInteger;
-
-// FIXME: Kind of a weird way to throw exceptions, consider removing
-
-
-
-/**
- * Turns a byte array into a big integer.
- *
- * This function will interpret a byte array as a big integer in big
- * endian notation.
- */
-bigi.fromByteArrayUnsigned = function(byteArray) {
-  // BigInteger expects a DER integer conformant byte array
-  if (byteArray[0] & 0x80) {
-    return new bigi([0].concat(byteArray))
-  }
-
-  return new bigi(byteArray)
-};
-
-/**
- * Returns a byte array representation of the big integer.
- *
- * This returns the absolute of the contained value in big endian
- * form. A value of zero results in an empty array.
- */
-bigi.prototype.toByteArrayUnsigned = function() {
-  var byteArray = this.toByteArray();
-  return byteArray[0] === 0 ? byteArray.slice(1) : byteArray
-};
-
-bigi.fromDERInteger = function(byteArray) {
-  return new bigi(byteArray)
-};
-
-/*
- * Converts BigInteger to a DER integer representation.
- *
- * The format for this value uses the most significant bit as a sign
- * bit.  If the most significant bit is already set and the integer is
- * positive, a 0x00 is prepended.
- *
- * Examples:
- *
- *      0 =>     0x00
- *      1 =>     0x01
- *     -1 =>     0xff
- *    127 =>     0x7f
- *   -127 =>     0x81
- *    128 =>   0x0080
- *   -128 =>     0x80
- *    255 =>   0x00ff
- *   -255 =>   0xff01
- *  16300 =>   0x3fac
- * -16300 =>   0xc054
- *  62300 => 0x00f35c
- * -62300 => 0xff0ca4
-*/
-bigi.prototype.toDERInteger = bigi.prototype.toByteArray;
-
-bigi.fromBuffer = function(buffer) {
-  // BigInteger expects a DER integer conformant byte array
-  if (buffer[0] & 0x80) {
-    var byteArray = Array.prototype.slice.call(buffer);
-
-    return new bigi([0].concat(byteArray))
-  }
-
-  return new bigi(buffer)
-};
-
-bigi.fromHex = function(hex) {
-  if (hex === '') return bigi.ZERO
-
-  assert$6.equal(hex, hex.match(/^[A-Fa-f0-9]+/), 'Invalid hex string');
-  assert$6.equal(hex.length % 2, 0, 'Incomplete hex');
-  return new bigi(hex, 16)
-};
-
-bigi.prototype.toBuffer = function(size) {
-  var byteArray = this.toByteArrayUnsigned();
-  var zeros = [];
-
-  var padding = size - byteArray.length;
-  while (zeros.length < padding) zeros.push(0);
-
-  return new Buffer(zeros.concat(byteArray))
-};
-
-bigi.prototype.toHex = function(size) {
-  return this.toBuffer(size).toString('hex')
-};
-
-var convert = {
-
-};
-
-//addons
-
-
-var lib = bigi;
-
-'use strict';
-
-
-
-var ALPHABET = 'abcdefghjkmnprstuvwxyz0123456789'; // pre-compute lookup table
-
-var SEPARATOR = ':';
-var CSLEN = 8;
+var ALPHABET = 'ABCDEFGHJKMNPRSTUVWXYZ0123456789';
 var ALPHABET_MAP = {};
 
 for (var z = 0; z < ALPHABET.length; z++) {
@@ -8184,239 +6472,225 @@ for (var z = 0; z < ALPHABET.length; z++) {
   }
 
   ALPHABET_MAP[x] = z;
-}
-
-function polymodStep(pre) {
-  var b = pre.shiftRight(35);
-  var mask = lib.fromHex('07ffffffff');
-  var v = pre.and(mask).shiftLeft(new lib('5'));
-
-  if (b.and(new lib('1')).intValue() > 0) {
-    v = v.xor(lib.fromHex('98f2bc8e61'));
-  }
-
-  if (b.and(new lib('2')).intValue()) {
-    v = v.xor(lib.fromHex('79b76d99e2'));
-  }
-
-  if (b.and(new lib('4')).intValue()) {
-    v = v.xor(lib.fromHex('f33e5fb3c4'));
-  }
-
-  if (b.and(new lib('8')).intValue()) {
-    v = v.xor(lib.fromHex('ae2eabe2a8'));
-  }
-
-  if (b.and(new lib('16')).intValue()) {
-    v = v.xor(lib.fromHex('1e4f43e470'));
-  }
-
-  return v;
-}
-
-function prefixChk(prefix) {
-  var chk = new lib('1');
-
-  for (var i = 0; i < prefix.length; ++i) {
-    var c = prefix.charCodeAt(i);
-    var mixwith = new lib('' + (c & 0x1f));
-    chk = polymodStep(chk).xor(mixwith);
-  }
-
-  chk = polymodStep(chk);
-  return chk;
-}
-
-function encode$1(prefix, words) {
-  // too long?
-  if (prefix.length + CSLEN + 1 + words.length > 90) {
-    throw new TypeError('Exceeds Base32 maximum length');
-  }
-
-  prefix = prefix.toLowerCase(); // determine chk mod
-
-  var chk = prefixChk(prefix);
-  var result = prefix + SEPARATOR;
-
-  for (var i = 0; i < words.length; ++i) {
-    var _x = words[i];
-
-    if (_x >>> 5 !== 0) {
-      throw new Error('Non 5-bit word');
-    }
-
-    chk = polymodStep(chk).xor(new lib('' + _x));
-    result += ALPHABET.charAt(_x);
-  }
-
-  for (var _i = 0; _i < CSLEN; ++_i) {
-    chk = polymodStep(chk);
-  }
-
-  chk = chk.xor(new lib('1'));
-
-  for (var _i2 = 0; _i2 < CSLEN; ++_i2) {
-    var pos = 5 * (CSLEN - 1 - _i2);
-    var v2 = chk.shiftRight(new lib('' + pos)).and(lib.fromHex('1f'));
-    result += ALPHABET.charAt(v2.toString(10));
-  }
-
-  return result;
-}
-
-function decode$1(str) {
-  if (str.length < 8) {
-    throw new TypeError(str + ' too short');
-  }
-
-  if (str.length > 90) {
-    throw new TypeError(str + ' too long');
-  } // don't allow mixed case
+} // pre defined BigInt could faster about 40 percent
 
 
-  var lowered = str.toLowerCase();
-  var uppered = str.toUpperCase();
+var BIGINT_0 = JSBI$1.BigInt(0);
+var BIGINT_1 = JSBI$1.BigInt(1);
+var BIGINT_5 = JSBI$1.BigInt(5);
+var BIGINT_35 = JSBI$1.BigInt(35);
+var BIGINT_0B00001 = JSBI$1.BigInt(1);
+var BIGINT_0B00010 = JSBI$1.BigInt(2);
+var BIGINT_0B00100 = JSBI$1.BigInt(4);
+var BIGINT_0B01000 = JSBI$1.BigInt(8);
+var BIGINT_0B10000 = JSBI$1.BigInt(16);
+var BIGINT_0X07FFFFFFFF = JSBI$1.BigInt(0x07ffffffff);
+var BIGINT_0X98F2BC8E61 = JSBI$1.BigInt(0x98f2bc8e61);
+var BIGINT_0X79B76D99E2 = JSBI$1.BigInt(0x79b76d99e2);
+var BIGINT_0XF33E5FB3C4 = JSBI$1.BigInt(0xf33e5fb3c4);
+var BIGINT_0XAE2EABE2A8 = JSBI$1.BigInt(0xae2eabe2a8);
+var BIGINT_0X1E4F43E470 = JSBI$1.BigInt(0x1e4f43e470);
 
-  if (str !== lowered && str !== uppered) {
-    throw new Error('Mixed-case string ' + str);
-  }
-
-  str = lowered;
-  var split = str.lastIndexOf(SEPARATOR);
-
-  if (split === -1) {
-    throw new Error('No separator character for ' + str);
-  }
-
-  if (split === 0) {
-    throw new Error('Missing prefix for ' + str);
-  }
-
-  var prefix = str.slice(0, split);
-  var wordChars = str.slice(split + 1);
-
-  if (wordChars.length < 6) {
-    throw new Error('Data too short');
-  }
-
-  var chk = prefixChk(prefix);
-  var words = [];
-
-  for (var i = 0; i < wordChars.length; ++i) {
-    var c = wordChars.charAt(i);
-    var v = ALPHABET_MAP[c];
-
-    if (v === undefined) {
-      throw new Error('Unknown character ' + c);
-    }
-
-    chk = polymodStep(chk).xor(new lib('' + v)); // not in the checksum?
-
-    if (i + CSLEN >= wordChars.length) {
-      continue;
-    }
-
-    words.push(v);
-  }
-
-  if (chk.toString(10) !== '1') {
-    throw new Error('Invalid checksum for ' + str);
-  }
-
-  return {
-    prefix: prefix,
-    words: words
-  };
-}
-
-function convert$1(data, inBits, outBits, pad) {
-  var value = 0;
+function convertBit(buffer, inBits, outBits, pad) {
+  var mask = (1 << outBits) - 1;
+  var array = [];
   var bits = 0;
-  var maxV = (1 << outBits) - 1;
-  var result = [];
+  var value = 0;
 
-  for (var i = 0; i < data.length; ++i) {
-    value = value << inBits | data[i];
-    bits += inBits;
+  var _iterator = _createForOfIteratorHelper(buffer),
+      _step;
 
-    while (bits >= outBits) {
-      bits -= outBits;
-      result.push(value >>> bits & maxV);
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var _byte = _step.value;
+      bits += inBits;
+      value = value << inBits | _byte;
+
+      while (bits >= outBits) {
+        bits -= outBits;
+        array.push(value >>> bits & mask);
+      }
     }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
   }
 
-  if (pad) {
-    if (bits > 0) {
-      result.push(value << outBits - bits & maxV);
-    }
-  } else {
-    if (bits >= inBits) {
-      throw new Error('Excess padding');
-    }
+  value = value << outBits - bits & mask;
 
-    if (value << outBits - bits & maxV) {
-      throw new Error('Non-zero padding');
-    }
+  if (bits && pad) {
+    array.push(value);
+  } else if (value && !pad) {
+    throw new Error('Excess padding');
+  } else if (bits >= inBits && !pad) {
+    throw new Error('Non-zero padding');
   }
 
-  return result;
+  return array;
 }
 
-function toWords(bytes) {
-  return convert$1(bytes, 8, 5, true);
-}
+function polyMod(buffer) {
+  var checksumBigInt = BIGINT_1;
 
-function fromWords(words) {
-  return convert$1(words, 5, 8, false);
+  var _iterator2 = _createForOfIteratorHelper(buffer),
+      _step2;
+
+  try {
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      var _byte2 = _step2.value;
+      // c0 = c >> 35;
+      var high = JSBI$1.signedRightShift(checksumBigInt, BIGINT_35); // XXX: checksumBigInt must be positive, signedRightShift is ok
+      // c = ((c & 0x07ffffffff) << 5) ^ d;
+
+      checksumBigInt = JSBI$1.bitwiseAnd(checksumBigInt, BIGINT_0X07FFFFFFFF);
+      checksumBigInt = JSBI$1.leftShift(checksumBigInt, BIGINT_5);
+      checksumBigInt = _byte2 ? JSBI$1.bitwiseXor(checksumBigInt, JSBI$1.BigInt(_byte2)) : checksumBigInt; // bit ^ 0 = bit
+
+      if (JSBI$1.notEqual(JSBI$1.bitwiseAnd(high, BIGINT_0B00001), BIGINT_0)) {
+        checksumBigInt = JSBI$1.bitwiseXor(checksumBigInt, BIGINT_0X98F2BC8E61);
+      }
+
+      if (JSBI$1.notEqual(JSBI$1.bitwiseAnd(high, BIGINT_0B00010), BIGINT_0)) {
+        checksumBigInt = JSBI$1.bitwiseXor(checksumBigInt, BIGINT_0X79B76D99E2);
+      }
+
+      if (JSBI$1.notEqual(JSBI$1.bitwiseAnd(high, BIGINT_0B00100), BIGINT_0)) {
+        checksumBigInt = JSBI$1.bitwiseXor(checksumBigInt, BIGINT_0XF33E5FB3C4);
+      }
+
+      if (JSBI$1.notEqual(JSBI$1.bitwiseAnd(high, BIGINT_0B01000), BIGINT_0)) {
+        checksumBigInt = JSBI$1.bitwiseXor(checksumBigInt, BIGINT_0XAE2EABE2A8);
+      }
+
+      if (JSBI$1.notEqual(JSBI$1.bitwiseAnd(high, BIGINT_0B10000), BIGINT_0)) {
+        checksumBigInt = JSBI$1.bitwiseXor(checksumBigInt, BIGINT_0X1E4F43E470);
+      }
+    }
+  } catch (err) {
+    _iterator2.e(err);
+  } finally {
+    _iterator2.f();
+  }
+
+  return JSBI$1.bitwiseXor(checksumBigInt, BIGINT_1);
 }
 
 var base32 = {
-  decode: decode$1,
-  encode: encode$1,
-  toWords: toWords,
-  fromWords: fromWords
+  convertBit: convertBit,
+  polyMod: polyMod,
+  ALPHABET: ALPHABET,
+  ALPHABET_MAP: ALPHABET_MAP
 };
 
-'use strict';
-/** global: Buffer */
+"use strict";
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+var TYPE_USER = 'user';
+var TYPE_CONTRACT = 'contract';
+var TYPE_BUILTIN = 'builtin';
+var TYPE_NULL = 'null';
+var TYPE_UNKNOWN = 'unknown';
+var PREFIX_CFX = 'cfx';
+var PREFIX_CFXTEST = 'cfxtest';
+var PREFIX_NET = 'net';
+var NETID_MAIN = 1029;
+var NETID_TEST = 1;
+var ZERO_ADDRESS_HEX = '0x0000000000000000000000000000000000000000';
+var ADMIN_CONTROL = '0x0888000000000000000000000000000000000000';
+var SPONSOR_CONTROL = '0x0888000000000000000000000000000000000001';
+var STAKING = '0x0888000000000000000000000000000000000002';
+var CONFLUX_CONTEXT = '0x0888000000000000000000000000000000000004';
+var POS_REGISTER = '0x0888000000000000000000000000000000000005';
+var _const = {
+  TYPE_USER: TYPE_USER,
+  TYPE_CONTRACT: TYPE_CONTRACT,
+  TYPE_BUILTIN: TYPE_BUILTIN,
+  TYPE_NULL: TYPE_NULL,
+  TYPE_UNKNOWN: TYPE_UNKNOWN,
+  PREFIX_CFX: PREFIX_CFX,
+  PREFIX_CFXTEST: PREFIX_CFXTEST,
+  PREFIX_NET: PREFIX_NET,
+  NETID_MAIN: NETID_MAIN,
+  NETID_TEST: NETID_TEST,
+  ZERO_ADDRESS_HEX: ZERO_ADDRESS_HEX,
+  ADMIN_CONTROL: ADMIN_CONTROL,
+  SPONSOR_CONTROL: SPONSOR_CONTROL,
+  STAKING: STAKING,
+  CONFLUX_CONTEXT: CONFLUX_CONTEXT,
+  POS_REGISTER: POS_REGISTER
+};
+
+"use strict";
+
+var isHexString$1 = function (v) {
+  return typeof v === 'string' && v.match(/^0x[0-9A-Fa-f]*$/);
+};
+
+var isString = function (data) {
+  return typeof data === 'string';
+};
+
+var utils = {
+	isHexString: isHexString$1,
+	isString: isString
+};
+
+"use strict";
+
+function _toArray(arr) { return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$1(arr) || _nonIterableRest(); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray$1(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$1(arr) || _nonIterableSpread(); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray$1(arr); }
+
+function _createForOfIteratorHelper$1(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray$1(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray$1(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray$1(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen); }
+
+function _arrayLikeToArray$1(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var ALPHABET$1 = base32.ALPHABET,
+    ALPHABET_MAP$1 = base32.ALPHABET_MAP,
+    polyMod$1 = base32.polyMod,
+    convertBit$1 = base32.convertBit;
+
+
+
+var isHexString$2 = utils.isHexString;
 
 var VERSION_BYTE = 0;
 var NET_ID_LIMIT = 0xFFFFFFFF;
-
-
 
 function encodeNetId(netId) {
   if (!Number.isInteger(netId)) {
     throw new Error('netId should be passed as an integer');
   }
 
-  if (netId <= 0 || netId > NET_ID_LIMIT) {
-    throw new Error('netId should be passed as in range [1, 0xFFFFFFFF]');
+  if (netId < 0 || netId > NET_ID_LIMIT) {
+    throw new Error('netId should be passed as in range [0, 0xFFFFFFFF]');
   }
 
   switch (netId) {
-    case 1:
-      return 'cfxtest';
+    case _const.NETID_TEST:
+      return _const.PREFIX_CFXTEST;
 
-    case 1029:
-      return 'cfx';
+    case _const.NETID_MAIN:
+      return _const.PREFIX_CFX;
 
     default:
-      return "net".concat(netId);
+      return "".concat(_const.PREFIX_NET).concat(netId);
   }
 }
 
@@ -8426,40 +6700,28 @@ function isValidNetId(netId) {
 
 function decodeNetId(payload) {
   switch (payload) {
-    case 'cfxtest':
-      return 1;
+    case _const.PREFIX_CFXTEST:
+      return _const.NETID_TEST;
 
-    case 'cfx':
-      return 1029;
+    case _const.PREFIX_CFX:
+      return _const.NETID_MAIN;
 
     default:
       {
         var prefix = payload.slice(0, 3);
         var netId = payload.slice(3);
 
-        if (prefix !== 'net' || !isValidNetId(netId)) {
+        if (prefix !== _const.PREFIX_NET || !isValidNetId(netId)) {
           throw new Error("netId prefix should be passed by 'cfx', 'cfxtest' or 'net[n]' ");
         }
 
-        if (Number(netId) === 1 || Number(netId) === 1029) {
+        if (Number(netId) === _const.NETID_TEST || Number(netId) === _const.NETID_MAIN) {
           throw new Error('net1 or net1029 are invalid');
         }
 
         return Number(netId);
       }
   }
-}
-
-function encodePayload(hexAddress) {
-  return Buffer.concat([Buffer.from([VERSION_BYTE]), hexAddress]);
-}
-
-function decodePayload(payload) {
-  if (payload[0] !== VERSION_BYTE) {
-    throw new Error('Can not recognize version byte');
-  }
-
-  return Buffer.from(payload.slice(1));
 }
 
 function getAddressType(hexAddress) {
@@ -8469,13 +6731,13 @@ function getAddressType(hexAddress) {
 
   switch (hexAddress[0] & 0xf0) {
     case 0x10:
-      return 'user';
+      return _const.TYPE_USER;
 
     case 0x80:
-      return 'contract';
+      return _const.TYPE_CONTRACT;
 
     case 0x00:
-      var _iterator = _createForOfIteratorHelper(hexAddress),
+      var _iterator = _createForOfIteratorHelper$1(hexAddress),
           _step;
 
       try {
@@ -8483,7 +6745,7 @@ function getAddressType(hexAddress) {
           var x = _step.value;
 
           if (x !== 0x00) {
-            return 'builtin';
+            return _const.TYPE_BUILTIN;
           }
         }
       } catch (err) {
@@ -8492,15 +6754,20 @@ function getAddressType(hexAddress) {
         _iterator.f();
       }
 
-      return 'null';
+      return _const.TYPE_NULL;
 
     default:
-      throw new Error('hexAddress should start with 0x0, 0x1 or 0x8');
+      return _const.TYPE_UNKNOWN;
+    // throw new Error('hexAddress should start with 0x0, 0x1 or 0x8')
   }
 }
 
-function encode$2(hexAddress, netId) {
+function encode$1(hexAddress, netId) {
   var verbose = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+  if (isHexString$2(hexAddress)) {
+    hexAddress = Buffer.from(hexAddress.slice(2), 'hex');
+  }
 
   if (!(hexAddress instanceof Buffer)) {
     throw new Error('hexAddress should be passed as a Buffer');
@@ -8510,22 +6777,25 @@ function encode$2(hexAddress, netId) {
     throw new Error('hexAddress should be at least 20 bytes');
   }
 
-  var addressType = getAddressType(hexAddress);
-  var encodedAddress = base32.encode(encodeNetId(netId), base32.toWords(encodePayload(hexAddress)));
-
-  if (verbose) {
-    var _encodedAddress$split = encodedAddress.split(':'),
-        _encodedAddress$split2 = _slicedToArray(_encodedAddress$split, 2),
-        prefix = _encodedAddress$split2[0],
-        payload = _encodedAddress$split2[1];
-
-    encodedAddress = [prefix, "type.".concat(addressType), payload].join(':').toUpperCase();
-  }
-
-  return encodedAddress;
+  var addressType = getAddressType(hexAddress).toUpperCase();
+  var netName = encodeNetId(netId).toUpperCase();
+  var netName5Bits = Buffer.from(netName).map(function (_byte) {
+    return _byte & 31;
+  });
+  var payload5Bits = convertBit$1([VERSION_BYTE].concat(_toConsumableArray(hexAddress)), 8, 5, true);
+  var checksumBigInt = polyMod$1([].concat(_toConsumableArray(netName5Bits), [0], _toConsumableArray(payload5Bits), [0, 0, 0, 0, 0, 0, 0, 0]));
+  var checksumBytes = Buffer.from(checksumBigInt.toString(16).padStart(10, '0'), 'hex');
+  var checksum5Bits = convertBit$1(checksumBytes, 8, 5, true);
+  var payload = payload5Bits.map(function (_byte2) {
+    return ALPHABET$1[_byte2];
+  }).join('');
+  var checksum = checksum5Bits.map(function (_byte3) {
+    return ALPHABET$1[_byte3];
+  }).join('');
+  return verbose ? "".concat(netName, ":TYPE.").concat(addressType, ":").concat(payload).concat(checksum) : "".concat(netName, ":").concat(payload).concat(checksum).toLowerCase();
 }
 
-function decode$2(address) {
+function decode$1(address) {
   // don't allow mixed case
   var lowered = address.toLowerCase();
   var uppered = address.toUpperCase();
@@ -8534,44 +6804,286 @@ function decode$2(address) {
     throw new Error('Mixed-case address ' + address);
   }
 
-  var splits = address.split(':');
-  var shouldHaveType = '';
-  var reducedAddress = address;
+  var _address$toUpperCase$ = address.toUpperCase().match(/^([^:]+):(.+:)?(.{34})(.{8})$/),
+      _address$toUpperCase$2 = _slicedToArray(_address$toUpperCase$, 5),
+      netName = _address$toUpperCase$2[1],
+      shouldHaveType = _address$toUpperCase$2[2],
+      payload = _address$toUpperCase$2[3],
+      checksum = _address$toUpperCase$2[4];
 
-  if (splits.length === 3) {
-    shouldHaveType = splits[1];
-    reducedAddress = [splits[0], splits[2]].join(':');
+  var prefix5Bits = Buffer.from(netName).map(function (_byte4) {
+    return _byte4 & 31;
+  });
+  var payload5Bits = [];
+
+  var _iterator2 = _createForOfIteratorHelper$1(payload),
+      _step2;
+
+  try {
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      var _char = _step2.value;
+      payload5Bits.push(ALPHABET_MAP$1[_char]);
+    }
+  } catch (err) {
+    _iterator2.e(err);
+  } finally {
+    _iterator2.f();
   }
 
-  var result = base32.decode(reducedAddress);
-  var data = base32.fromWords(result.words);
+  var checksum5Bits = [];
 
-  if (data.length < 1) {
-    throw new Error('Empty payload in address');
+  var _iterator3 = _createForOfIteratorHelper$1(checksum),
+      _step3;
+
+  try {
+    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+      var _char2 = _step3.value;
+      checksum5Bits.push(ALPHABET_MAP$1[_char2]);
+    }
+  } catch (err) {
+    _iterator3.e(err);
+  } finally {
+    _iterator3.f();
   }
 
-  var returnValue = {
-    hexAddress: decodePayload(data),
-    netId: decodeNetId(result.prefix),
-    type: getAddressType(decodePayload(data))
-  };
+  var _convertBit = convertBit$1(payload5Bits, 5, 8),
+      _convertBit2 = _toArray(_convertBit),
+      version = _convertBit2[0],
+      addressBytes = _convertBit2.slice(1);
 
-  if (shouldHaveType !== '' && "type.".concat(returnValue.type) !== shouldHaveType.toLowerCase()) {
+  if (version !== VERSION_BYTE) {
+    throw new Error('Can not recognize version byte');
+  }
+
+  var hexAddress = Buffer.from(addressBytes);
+  var netId = decodeNetId(netName.toLowerCase());
+  var type = getAddressType(hexAddress);
+
+  if (shouldHaveType && "type.".concat(type, ":") !== shouldHaveType.toLowerCase()) {
     throw new Error('Type of address doesn\'t match');
   }
 
-  return returnValue;
+  var bigInt = polyMod$1([].concat(_toConsumableArray(prefix5Bits), [0], payload5Bits, checksum5Bits));
+
+  if (Number(bigInt)) {
+    throw new Error("Invalid checksum for ".concat(address));
+  }
+
+  return {
+    hexAddress: hexAddress,
+    netId: netId,
+    type: type
+  };
 }
 
-var lib$1 = {
-  decode: decode$2,
-  encode: encode$2
+var pureJsCip37 = {
+  encode: encode$1,
+  decode: decode$1
 };
 
-const version$7 = "address/5.0.37";
+var cip37 = createCommonjsModule(function (module) {
+"use strict";
+
+try {
+  var _require = require$$0,
+      _encode = _require.encode,
+      decode = _require.decode;
+
+  module.exports = {
+    encode: function encode(hexAddress, netId) {
+      var verbose = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+      if (Buffer.isBuffer(hexAddress)) {
+        hexAddress = hexAddress.toString('hex');
+      }
+
+      return _encode(hexAddress, netId, verbose);
+    },
+    decode: decode
+  };
+} catch (e) {
+  // console.log('To gain a address conversion performance boost, install @conflux-dev/conflux-address-rust')
+  module.exports = pureJsCip37;
+}
+});
 
 "use strict";
-const logger$7 = new Logger(version$7);
+
+function _slicedToArray$1(arr, i) { return _arrayWithHoles$1(arr) || _iterableToArrayLimit$1(arr, i) || _unsupportedIterableToArray$2(arr, i) || _nonIterableRest$1(); }
+
+function _nonIterableRest$1() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray$2(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray$2(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$2(o, minLen); }
+
+function _arrayLikeToArray$2(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit$1(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles$1(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+var isHexString$3 = utils.isHexString,
+    isString$1 = utils.isString;
+/**
+ * Check conflux address's prefix
+ *
+ * @param address {string}
+ * @return {boolean}
+ *
+ * @example
+ */
+
+
+function hasNetworkPrefix(address) {
+  if (!isString$1(address)) {
+    return false;
+  }
+
+  var parts = address.toLowerCase().split(':');
+
+  if (parts.length !== 2 && parts.length !== 3) {
+    return false;
+  }
+
+  var prefix = parts[0];
+
+  if (prefix === _const.PREFIX_CFX || prefix === _const.PREFIX_CFXTEST) {
+    return true;
+  }
+
+  return prefix.startsWith(_const.PREFIX_NET) && /^([1-9]\d*)$/.test(prefix.slice(3));
+}
+/**
+ * simplify a verbose address(return a non-verbose address)
+ *
+ * @param address {string}
+ * @return {string}
+ *
+ */
+
+
+function simplifyCfxAddress(address) {
+  if (!hasNetworkPrefix(address)) {
+    throw new Error('invalid base32 address');
+  }
+
+  var parts = address.toLocaleLowerCase().split(':');
+
+  if (parts.length !== 3) {
+    return address;
+  }
+
+  return "".concat(parts[0], ":").concat(parts[2]);
+}
+
+function shortenCfxAddress(address) {
+  var compress = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  address = simplifyCfxAddress(address);
+
+  var _address$split = address.split(':'),
+      _address$split2 = _slicedToArray$1(_address$split, 2),
+      netPre = _address$split2[0],
+      body = _address$split2[1];
+
+  var tailLen = netPre === 'cfx' && !compress ? 8 : 4;
+  var pre = body.slice(0, 3);
+  var tail = body.slice(body.length - tailLen);
+  return "".concat(netPre, ":").concat(pre, "...").concat(tail);
+}
+
+function isZeroAddress(address) {
+  if (!isHexString$3(address)) throw new Error('Only hex is allowed');
+  return address === _const.ZERO_ADDRESS_HEX;
+}
+
+function isInternalContractAddress(address) {
+  if (!isHexString$3(address)) throw new Error('Only hex is allowed');
+  return address === _const.ADMIN_CONTROL || address === _const.SPONSOR_CONTROL || address === _const.STAKING || address === _const.CONFLUX_CONTEXT || address === _const.POS_REGISTER;
+}
+
+function isValidHexAddress(address) {
+  return isHexString$3(address) && address.length === 42;
+} // TOOD check address's checksum
+
+
+function isValidCfxHexAddress(address) {
+  if (address.length !== 42) return false;
+  if (isZeroAddress(address) || isInternalContractAddress(address)) return true;
+  return address.startsWith('0x1') || address.startsWith('0x8');
+}
+
+var addressUtils = {
+  hasNetworkPrefix: hasNetworkPrefix,
+  simplifyCfxAddress: simplifyCfxAddress,
+  shortenCfxAddress: shortenCfxAddress,
+  isZeroAddress: isZeroAddress,
+  isInternalContractAddress: isInternalContractAddress,
+  isValidHexAddress: isValidHexAddress,
+  isValidCfxHexAddress: isValidCfxHexAddress
+};
+
+"use strict";
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+var encode$2 = cip37.encode,
+    decode$2 = cip37.decode;
+
+var rest = _extends({}, addressUtils);
+
+var isString$2 = utils.isString;
+/**
+ * Check whether a given address is valid, will return a boolean value
+ *
+ * @param address {string}
+ * @return {boolean}
+ *
+ */
+
+
+function isValidCfxAddress(address) {
+  if (!isString$2(address)) {
+    return false;
+  }
+
+  try {
+    decode$2(address);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+/**
+ * Check whether a given address is valid, if not valid will throw an error
+ *
+ * @param address {string}
+ *
+ */
+
+
+function verifyCfxAddress(address) {
+  decode$2(address);
+  return true;
+}
+
+var lib = _objectSpread({
+  encode: encode$2,
+  decode: decode$2,
+  isValidCfxAddress: isValidCfxAddress,
+  verifyCfxAddress: verifyCfxAddress
+}, rest);
+
+const version$6 = "address/5.0.37";
+
+"use strict";
+const logger$7 = new Logger(version$6);
 function isLikeHex40Address(address) {
     return /^0x[0-9a-fA-F]{40}$/.test(address);
 }
@@ -8583,14 +7095,13 @@ function getBase32AddressFromHex40(address, chainId) {
     if (isLikeBase32Address(address)) {
         return address;
     }
-    const hexBuffer = Buffer.from(address.slice(2), 'hex');
-    return lib$1.encode(hexBuffer, chainId);
+    return lib.encode(address, chainId);
 }
 function getHex40AddressFromBase32(address) {
     if (isLikeHex40Address(address)) {
         return address;
     }
-    return getChecksumAddress(`0x${lib$1.decode(address).hexAddress.toString('hex')}`);
+    return getChecksumAddress(`0x${lib.decode(address).hexAddress.toString('hex')}`);
 }
 function getChecksumAddress(address) {
     if (!isHexString(address, 20)) {
@@ -9108,10 +7619,10 @@ class NumberCoder extends Coder {
     }
 }
 
-const version$8 = "strings/5.0.37";
+const version$7 = "strings/5.0.37";
 
 "use strict";
-const logger$9 = new Logger(version$8);
+const logger$9 = new Logger(version$7);
 ///////////////////////////////
 var UnicodeNormalizationForm;
 (function (UnicodeNormalizationForm) {
@@ -9729,9 +8240,9 @@ function id(text) {
     return keccak256(toUtf8Bytes(text));
 }
 
-const version$9 = "hash/5.0.37";
+const version$8 = "hash/5.0.37";
 
-const logger$b = new Logger(version$9);
+const logger$b = new Logger(version$8);
 const Zeros = new Uint8Array(32);
 Zeros.fill(0);
 const Partition = new RegExp("^((.*)\\.)?([^.]+)$");
@@ -9784,7 +8295,7 @@ var __awaiter$1 = (window && window.__awaiter) || function (thisArg, _arguments,
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const logger$c = new Logger(version$9);
+const logger$c = new Logger(version$8);
 const padding = new Uint8Array(32);
 padding.fill(0);
 const NegativeOne$2 = BigNumber.from(-1);
@@ -10701,10 +9212,10 @@ class Interface {
 
 "use strict";
 
-const version$a = "abstract-provider/5.0.37";
+const version$9 = "abstract-provider/5.0.37";
 
 "use strict";
-const logger$e = new Logger(version$a);
+const logger$e = new Logger(version$9);
 ;
 ;
 //export type CallTransactionable = {
@@ -10778,7 +9289,7 @@ class Provider {
     }
 }
 
-const version$b = "abstract-signer/5.0.37";
+const version$a = "abstract-signer/5.0.37";
 
 "use strict";
 var __awaiter$2 = (window && window.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -10790,7 +9301,7 @@ var __awaiter$2 = (window && window.__awaiter) || function (thisArg, _arguments,
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const logger$f = new Logger(version$b);
+const logger$f = new Logger(version$a);
 const allowedTransactionKeys = [
     "chainId", "data", "from", "gasLimit", "gasPrice", "nonce", "to", "value"
 ];
@@ -10987,7 +9498,7 @@ class VoidSigner extends Signer {
     }
 }
 
-const version$c = "contracts/5.0.37";
+const version$b = "contracts/5.0.37";
 
 "use strict";
 var __awaiter$3 = (window && window.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -10999,7 +9510,7 @@ var __awaiter$3 = (window && window.__awaiter) || function (thisArg, _arguments,
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const logger$g = new Logger(version$c);
+const logger$g = new Logger(version$b);
 ;
 ;
 ///////////////////////////////
@@ -12371,7 +10882,7 @@ function shr64_lo(ah, al, num) {
 }
 var shr64_lo_1 = shr64_lo;
 
-var utils = {
+var utils$1 = {
 	inherits: inherits_1,
 	toArray: toArray_1,
 	toHex: toHex_1,
@@ -12421,7 +10932,7 @@ var BlockHash_1 = BlockHash;
 
 BlockHash.prototype.update = function update(msg, enc) {
   // Convert message to array, pad it, and join into 32bit blocks
-  msg = utils.toArray(msg, enc);
+  msg = utils$1.toArray(msg, enc);
   if (!this.pending)
     this.pending = msg;
   else
@@ -12438,7 +10949,7 @@ BlockHash.prototype.update = function update(msg, enc) {
     if (this.pending.length === 0)
       this.pending = null;
 
-    msg = utils.join32(msg, 0, msg.length - r, this.endian);
+    msg = utils$1.join32(msg, 0, msg.length - r, this.endian);
     for (var i = 0; i < msg.length; i += this._delta32)
       this._update(msg, i, i + this._delta32);
   }
@@ -12500,7 +11011,7 @@ var common = {
 'use strict';
 
 
-var rotr32$1 = utils.rotr32;
+var rotr32$1 = utils$1.rotr32;
 
 function ft_1(s, x, y, z) {
   if (s === 0)
@@ -12564,9 +11075,9 @@ var common$1 = {
 
 
 
-var rotl32$1 = utils.rotl32;
-var sum32$1 = utils.sum32;
-var sum32_5$1 = utils.sum32_5;
+var rotl32$1 = utils$1.rotl32;
+var sum32$1 = utils$1.sum32;
+var sum32_5$1 = utils$1.sum32_5;
 var ft_1$1 = common$1.ft_1;
 var BlockHash$1 = common.BlockHash;
 
@@ -12586,7 +11097,7 @@ function SHA1() {
   this.W = new Array(80);
 }
 
-utils.inherits(SHA1, BlockHash$1);
+utils$1.inherits(SHA1, BlockHash$1);
 var _1 = SHA1;
 
 SHA1.blockSize = 512;
@@ -12628,9 +11139,9 @@ SHA1.prototype._update = function _update(msg, start) {
 
 SHA1.prototype._digest = function digest(enc) {
   if (enc === 'hex')
-    return utils.toHex32(this.h, 'big');
+    return utils$1.toHex32(this.h, 'big');
   else
-    return utils.split32(this.h, 'big');
+    return utils$1.split32(this.h, 'big');
 };
 
 'use strict';
@@ -12640,9 +11151,9 @@ SHA1.prototype._digest = function digest(enc) {
 
 
 
-var sum32$2 = utils.sum32;
-var sum32_4$1 = utils.sum32_4;
-var sum32_5$2 = utils.sum32_5;
+var sum32$2 = utils$1.sum32;
+var sum32_4$1 = utils$1.sum32_4;
+var sum32_5$2 = utils$1.sum32_5;
 var ch32$1 = common$1.ch32;
 var maj32$1 = common$1.maj32;
 var s0_256$1 = common$1.s0_256;
@@ -12683,7 +11194,7 @@ function SHA256() {
   this.k = sha256_K;
   this.W = new Array(64);
 }
-utils.inherits(SHA256, BlockHash$2);
+utils$1.inherits(SHA256, BlockHash$2);
 var _256 = SHA256;
 
 SHA256.blockSize = 512;
@@ -12734,9 +11245,9 @@ SHA256.prototype._update = function _update(msg, start) {
 
 SHA256.prototype._digest = function digest(enc) {
   if (enc === 'hex')
-    return utils.toHex32(this.h, 'big');
+    return utils$1.toHex32(this.h, 'big');
   else
-    return utils.split32(this.h, 'big');
+    return utils$1.split32(this.h, 'big');
 };
 
 'use strict';
@@ -12753,7 +11264,7 @@ function SHA224() {
     0xc1059ed8, 0x367cd507, 0x3070dd17, 0xf70e5939,
     0xffc00b31, 0x68581511, 0x64f98fa7, 0xbefa4fa4 ];
 }
-utils.inherits(SHA224, _256);
+utils$1.inherits(SHA224, _256);
 var _224 = SHA224;
 
 SHA224.blockSize = 512;
@@ -12764,9 +11275,9 @@ SHA224.padLength = 64;
 SHA224.prototype._digest = function digest(enc) {
   // Just truncate output
   if (enc === 'hex')
-    return utils.toHex32(this.h.slice(0, 7), 'big');
+    return utils$1.toHex32(this.h.slice(0, 7), 'big');
   else
-    return utils.split32(this.h.slice(0, 7), 'big');
+    return utils$1.split32(this.h.slice(0, 7), 'big');
 };
 
 'use strict';
@@ -12775,17 +11286,17 @@ SHA224.prototype._digest = function digest(enc) {
 
 
 
-var rotr64_hi$1 = utils.rotr64_hi;
-var rotr64_lo$1 = utils.rotr64_lo;
-var shr64_hi$1 = utils.shr64_hi;
-var shr64_lo$1 = utils.shr64_lo;
-var sum64$1 = utils.sum64;
-var sum64_hi$1 = utils.sum64_hi;
-var sum64_lo$1 = utils.sum64_lo;
-var sum64_4_hi$1 = utils.sum64_4_hi;
-var sum64_4_lo$1 = utils.sum64_4_lo;
-var sum64_5_hi$1 = utils.sum64_5_hi;
-var sum64_5_lo$1 = utils.sum64_5_lo;
+var rotr64_hi$1 = utils$1.rotr64_hi;
+var rotr64_lo$1 = utils$1.rotr64_lo;
+var shr64_hi$1 = utils$1.shr64_hi;
+var shr64_lo$1 = utils$1.shr64_lo;
+var sum64$1 = utils$1.sum64;
+var sum64_hi$1 = utils$1.sum64_hi;
+var sum64_lo$1 = utils$1.sum64_lo;
+var sum64_4_hi$1 = utils$1.sum64_4_hi;
+var sum64_4_lo$1 = utils$1.sum64_4_lo;
+var sum64_5_hi$1 = utils$1.sum64_5_hi;
+var sum64_5_lo$1 = utils$1.sum64_5_lo;
 
 var BlockHash$3 = common.BlockHash;
 
@@ -12849,7 +11360,7 @@ function SHA512() {
   this.k = sha512_K;
   this.W = new Array(160);
 }
-utils.inherits(SHA512, BlockHash$3);
+utils$1.inherits(SHA512, BlockHash$3);
 var _512 = SHA512;
 
 SHA512.blockSize = 1024;
@@ -12979,9 +11490,9 @@ SHA512.prototype._update = function _update(msg, start) {
 
 SHA512.prototype._digest = function digest(enc) {
   if (enc === 'hex')
-    return utils.toHex32(this.h, 'big');
+    return utils$1.toHex32(this.h, 'big');
   else
-    return utils.split32(this.h, 'big');
+    return utils$1.split32(this.h, 'big');
 };
 
 function ch64_hi(xh, xl, yh, yl, zh) {
@@ -13121,7 +11632,7 @@ function SHA384() {
     0xdb0c2e0d, 0x64f98fa7,
     0x47b5481d, 0xbefa4fa4 ];
 }
-utils.inherits(SHA384, _512);
+utils$1.inherits(SHA384, _512);
 var _384 = SHA384;
 
 SHA384.blockSize = 1024;
@@ -13131,9 +11642,9 @@ SHA384.padLength = 128;
 
 SHA384.prototype._digest = function digest(enc) {
   if (enc === 'hex')
-    return utils.toHex32(this.h.slice(0, 12), 'big');
+    return utils$1.toHex32(this.h.slice(0, 12), 'big');
   else
-    return utils.split32(this.h.slice(0, 12), 'big');
+    return utils$1.split32(this.h.slice(0, 12), 'big');
 };
 
 'use strict';
@@ -13157,10 +11668,10 @@ var sha = {
 
 
 
-var rotl32$2 = utils.rotl32;
-var sum32$3 = utils.sum32;
-var sum32_3$1 = utils.sum32_3;
-var sum32_4$2 = utils.sum32_4;
+var rotl32$2 = utils$1.rotl32;
+var sum32$3 = utils$1.sum32;
+var sum32_3$1 = utils$1.sum32_3;
+var sum32_4$2 = utils$1.sum32_4;
 var BlockHash$4 = common.BlockHash;
 
 function RIPEMD160() {
@@ -13172,7 +11683,7 @@ function RIPEMD160() {
   this.h = [ 0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0 ];
   this.endian = 'little';
 }
-utils.inherits(RIPEMD160, BlockHash$4);
+utils$1.inherits(RIPEMD160, BlockHash$4);
 var ripemd160 = RIPEMD160;
 
 RIPEMD160.blockSize = 512;
@@ -13223,9 +11734,9 @@ RIPEMD160.prototype._update = function update(msg, start) {
 
 RIPEMD160.prototype._digest = function digest(enc) {
   if (enc === 'hex')
-    return utils.toHex32(this.h, 'little');
+    return utils$1.toHex32(this.h, 'little');
   else
-    return utils.split32(this.h, 'little');
+    return utils$1.split32(this.h, 'little');
 };
 
 function f(j, x, y, z) {
@@ -13317,7 +11828,7 @@ function Hmac(hash, key, enc) {
   this.inner = null;
   this.outer = null;
 
-  this._init(utils.toArray(key, enc));
+  this._init(utils$1.toArray(key, enc));
 }
 var hmac = Hmac;
 
@@ -13354,7 +11865,7 @@ Hmac.prototype.digest = function digest(enc) {
 var hash_1 = createCommonjsModule(function (module, exports) {
 var hash = exports;
 
-hash.utils = utils;
+hash.utils = utils$1;
 hash.common = common;
 hash.sha = sha;
 hash.ripemd = ripemd;
@@ -13376,10 +11887,10 @@ var SupportedAlgorithm;
 })(SupportedAlgorithm || (SupportedAlgorithm = {}));
 ;
 
-const version$d = "sha2/5.0.37";
+const version$c = "sha2/5.0.37";
 
 "use strict";
-const logger$h = new Logger(version$d);
+const logger$h = new Logger(version$c);
 function ripemd160$1(data) {
     return "0x" + (hash_1.ripemd160().update(arrayify(data)).digest("hex"));
 }
@@ -15903,10 +14414,10 @@ elliptic.eddsa = /*RicMoo:ethers:require(./elliptic/eddsa)*/(null);
 
 var EC$1 = elliptic_1.ec;
 
-const version$e = "signing-key/5.0.37";
+const version$d = "signing-key/5.0.37";
 
 "use strict";
-const logger$i = new Logger(version$e);
+const logger$i = new Logger(version$d);
 let _curve = null;
 function getCurve() {
     if (!_curve) {
@@ -15975,10 +14486,10 @@ function computePublicKey(key, compressed) {
     return logger$i.throwArgumentError("invalid public or private key", "key", "[REDACTED]");
 }
 
-const version$f = "transactions/5.0.37";
+const version$e = "transactions/5.0.37";
 
 "use strict";
-const logger$j = new Logger(version$f);
+const logger$j = new Logger(version$e);
 ///////////////////////////////
 function handleAddress(value) {
     if (value === "0x") {
@@ -16136,12 +14647,12 @@ function parse(rawTransaction) {
     return tx;
 }
 
-const version$g = "wordlists/5.0.37";
+const version$f = "wordlists/5.0.37";
 
 "use strict";
 // This gets overridden by rollup
 const exportWordlist = false;
-const logger$k = new Logger(version$g);
+const logger$k = new Logger(version$f);
 class Wordlist {
     constructor(locale) {
         logger$k.checkAbstract(new.target, Wordlist);
@@ -16665,10 +15176,10 @@ const wordlists = {
 
 "use strict";
 
-const version$h = "hdnode/5.0.37";
+const version$g = "hdnode/5.0.37";
 
 "use strict";
-const logger$l = new Logger(version$h);
+const logger$l = new Logger(version$g);
 const N = BigNumber.from("0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141");
 // "Bitcoin seed"
 const MasterSecret = toUtf8Bytes("Bitcoin seed");
@@ -16980,10 +15491,10 @@ function isValidMnemonic(mnemonic, wordlist) {
     return false;
 }
 
-const version$i = "random/5.0.37";
+const version$h = "random/5.0.37";
 
 "use strict";
-const logger$m = new Logger(version$i);
+const logger$m = new Logger(version$h);
 let anyGlobal = null;
 try {
     anyGlobal = window;
@@ -17838,7 +16349,7 @@ var aesJs = createCommonjsModule(function (module, exports) {
 })(commonjsGlobal);
 });
 
-const version$j = "json-wallets/5.0.37";
+const version$i = "json-wallets/5.0.37";
 
 "use strict";
 function looseArrayify(hexString) {
@@ -17902,7 +16413,7 @@ function uuidV4(randomBytes) {
 }
 
 "use strict";
-const logger$n = new Logger(version$j);
+const logger$n = new Logger(version$i);
 class CrowdsaleAccount extends Description {
     isCrowdsaleAccount(value) {
         return !!(value && value._isCrowdsaleAccount);
@@ -18488,7 +16999,7 @@ var __awaiter$4 = (window && window.__awaiter) || function (thisArg, _arguments,
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const logger$o = new Logger(version$j);
+const logger$o = new Logger(version$i);
 // Exported Types
 function hasMnemonic(value) {
     return (value != null && value.mnemonic && value.mnemonic.phrase);
@@ -18808,7 +17319,7 @@ function decryptJsonWalletSync(json, password) {
     throw new Error("invalid JSON wallet");
 }
 
-const version$k = "wallet/5.0.37";
+const version$j = "wallet/5.0.37";
 
 "use strict";
 var __awaiter$5 = (window && window.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -18820,7 +17331,7 @@ var __awaiter$5 = (window && window.__awaiter) || function (thisArg, _arguments,
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const logger$p = new Logger(version$k);
+const logger$p = new Logger(version$j);
 function isAccount(value) {
     return (value != null && isHexString(value.privateKey, 32) && value.address != null);
 }
@@ -18973,139 +17484,92 @@ function verifyTypedData(domain, types, value, signature) {
     return recoverAddress(TypedDataEncoder.hash(domain, types, value), signature);
 }
 
-const version$l = "networks/5.0.37";
+const version$k = "networks/5.0.37";
 
 "use strict";
-const logger$q = new Logger(version$l);
+const logger$q = new Logger(version$k);
 ;
 function isRenetworkable(value) {
     return (value && typeof (value.renetwork) === "function");
 }
-function ethDefaultProvider(network) {
-    const func = function (providers, options) {
-        if (options == null) {
-            options = {};
-        }
-        const providerList = [];
-        if (providers.InfuraProvider) {
-            try {
-                providerList.push(new providers.InfuraProvider(network, options.infura));
-            }
-            catch (error) { }
-        }
-        if (providers.EtherscanProvider) {
-            try {
-                providerList.push(new providers.EtherscanProvider(network, options.etherscan));
-            }
-            catch (error) { }
-        }
-        if (providers.AlchemyProvider) {
-            try {
-                providerList.push(new providers.AlchemyProvider(network, options.alchemy));
-            }
-            catch (error) { }
-        }
-        if (providers.CloudflareProvider) {
-            try {
-                providerList.push(new providers.CloudflareProvider(network));
-            }
-            catch (error) { }
-        }
-        if (providerList.length === 0) {
-            return null;
-        }
-        if (providers.FallbackProvider) {
-            let quorum = 1;
-            if (options.quorum != null) {
-                quorum = options.quorum;
-            }
-            else if (network === "homestead") {
-                quorum = 2;
-            }
-            return new providers.FallbackProvider(providerList, quorum);
-        }
-        return providerList[0];
-    };
-    func.renetwork = function (network) {
-        return ethDefaultProvider(network);
-    };
-    return func;
-}
-function etcDefaultProvider(url, network) {
-    const func = function (providers, options) {
-        if (providers.JsonRpcProvider) {
-            return new providers.JsonRpcProvider(url, network);
-        }
-        return null;
-    };
-    func.renetwork = function (network) {
-        return etcDefaultProvider(url, network);
-    };
-    return func;
-}
-const homestead = {
-    chainId: 1,
-    ensAddress: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
-    name: "homestead",
-    _defaultProvider: ethDefaultProvider("homestead")
-};
-const ropsten = {
-    chainId: 3,
-    ensAddress: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
-    name: "ropsten",
-    _defaultProvider: ethDefaultProvider("ropsten")
-};
-const classicMordor = {
-    chainId: 63,
-    name: "classicMordor",
-    _defaultProvider: etcDefaultProvider("https://www.ethercluster.com/mordor", "classicMordor")
-};
+// function ethDefaultProvider(network: string | Network): Renetworkable {
+//     const func = function(providers: any, options?: any): any {
+//         if (options == null) { options = { }; }
+//         const providerList: Array<any> = [];
+//         if (providers.InfuraProvider) {
+//             try {
+//                 providerList.push(new providers.InfuraProvider(network, options.infura));
+//             } catch(error) { }
+//         }
+//         if (providers.EtherscanProvider) {
+//             try {
+//                 providerList.push(new providers.EtherscanProvider(network, options.etherscan));
+//             } catch(error) { }
+//         }
+//         if (providers.AlchemyProvider) {
+//             try {
+//                 providerList.push(new providers.AlchemyProvider(network, options.alchemy));
+//             } catch(error) { }
+//         }
+//         if (providers.CloudflareProvider) {
+//             try {
+//                 providerList.push(new providers.CloudflareProvider(network));
+//             } catch(error) { }
+//         }
+//         if (providerList.length === 0) { return null; }
+//         if (providers.FallbackProvider) {
+//             let quorum = 1;
+//             if (options.quorum != null) {
+//                 quorum = options.quorum;
+//             } else if (network === "homestead") {
+//                 quorum = 2;
+//             }
+//             return new providers.FallbackProvider(providerList, quorum);
+//         }
+//         return providerList[0];
+//     };
+//     func.renetwork = function(network: Network) {
+//         return ethDefaultProvider(network);
+//     };
+//     return func;
+// }
+// function etcDefaultProvider(url: string, network: string | Network): Renetworkable {
+//     const func = function(providers: any, options?: any): any {
+//         if (providers.JsonRpcProvider) {
+//             return new providers.JsonRpcProvider(url, network);
+//         }
+//         return null;
+//     };
+//     func.renetwork = function(network: Network) {
+//         return etcDefaultProvider(url, network);
+//     };
+//     return func;
+// }
+// const homestead: Network = {
+//     chainId: 1,
+//     ensAddress: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
+//     name: "homestead",
+//     _defaultProvider: ethDefaultProvider("homestead")
+// };
+// const ropsten: Network = {
+//     chainId: 3,
+//     ensAddress: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
+//     name: "ropsten",
+//     _defaultProvider: ethDefaultProvider("ropsten")
+// };
+// const classicMordor: Network = {
+//     chainId: 63,
+//     name: "classicMordor",
+//     _defaultProvider: etcDefaultProvider("https://www.ethercluster.com/mordor", "classicMordor")
+// };
 const networks = {
-    unspecified: {
-        chainId: 0,
-        name: "unspecified"
+    mainnet: {
+        chainId: 1029,
+        name: "mainnet"
     },
-    homestead: homestead,
-    mainnet: homestead,
-    morden: {
-        chainId: 2,
-        name: "morden"
-    },
-    ropsten: ropsten,
-    testnet: ropsten,
-    rinkeby: {
-        chainId: 4,
-        ensAddress: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
-        name: "rinkeby",
-        _defaultProvider: ethDefaultProvider("rinkeby")
-    },
-    kovan: {
-        chainId: 42,
-        name: "kovan",
-        _defaultProvider: ethDefaultProvider("kovan")
-    },
-    goerli: {
-        chainId: 5,
-        ensAddress: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
-        name: "goerli",
-        _defaultProvider: ethDefaultProvider("goerli")
-    },
-    // ETC (See: #351)
-    classic: {
-        chainId: 61,
-        name: "classic",
-        _defaultProvider: etcDefaultProvider("https://www.ethercluster.com/etc", "classic")
-    },
-    classicMorden: {
-        chainId: 62,
-        name: "classicMorden",
-    },
-    classicMordor: classicMordor,
-    classicTestnet: classicMordor,
-    classicKotti: {
-        chainId: 6,
-        name: "classicKotti",
-        _defaultProvider: etcDefaultProvider("https://www.ethercluster.com/kotti", "classicKotti")
+    testnet: {
+        chainId: 1,
+        name: "testnet"
     },
 };
 /**
@@ -19206,7 +17670,7 @@ var index$2 = /*#__PURE__*/Object.freeze({
 	encode: encode$3
 });
 
-const version$m = "web/5.0.37";
+const version$l = "web/5.0.37";
 
 "use strict";
 var __awaiter$6 = (window && window.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -19265,7 +17729,7 @@ var __awaiter$7 = (window && window.__awaiter) || function (thisArg, _arguments,
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const logger$r = new Logger(version$m);
+const logger$r = new Logger(version$l);
 function staller(duration) {
     return new Promise((resolve) => {
         setTimeout(resolve, duration);
@@ -19605,18 +18069,18 @@ function poll(func, options) {
 }
 
 'use strict';
-var ALPHABET$1 = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
+var ALPHABET$2 = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
 
 // pre-compute lookup table
-var ALPHABET_MAP$1 = {};
-for (var z$1 = 0; z$1 < ALPHABET$1.length; z$1++) {
-  var x$1 = ALPHABET$1.charAt(z$1);
+var ALPHABET_MAP$2 = {};
+for (var z$1 = 0; z$1 < ALPHABET$2.length; z$1++) {
+  var x$1 = ALPHABET$2.charAt(z$1);
 
-  if (ALPHABET_MAP$1[x$1] !== undefined) throw new TypeError(x$1 + ' is ambiguous')
-  ALPHABET_MAP$1[x$1] = z$1;
+  if (ALPHABET_MAP$2[x$1] !== undefined) throw new TypeError(x$1 + ' is ambiguous')
+  ALPHABET_MAP$2[x$1] = z$1;
 }
 
-function polymodStep$1 (pre) {
+function polymodStep (pre) {
   var b = pre >> 25;
   return ((pre & 0x1FFFFFF) << 5) ^
     (-((b >> 0) & 1) & 0x3b6a57b2) ^
@@ -19626,19 +18090,19 @@ function polymodStep$1 (pre) {
     (-((b >> 4) & 1) & 0x2a1462b3)
 }
 
-function prefixChk$1 (prefix) {
+function prefixChk (prefix) {
   var chk = 1;
   for (var i = 0; i < prefix.length; ++i) {
     var c = prefix.charCodeAt(i);
     if (c < 33 || c > 126) return 'Invalid prefix (' + prefix + ')'
 
-    chk = polymodStep$1(chk) ^ (c >> 5);
+    chk = polymodStep(chk) ^ (c >> 5);
   }
-  chk = polymodStep$1(chk);
+  chk = polymodStep(chk);
 
   for (i = 0; i < prefix.length; ++i) {
     var v = prefix.charCodeAt(i);
-    chk = polymodStep$1(chk) ^ (v & 0x1f);
+    chk = polymodStep(chk) ^ (v & 0x1f);
   }
   return chk
 }
@@ -19650,7 +18114,7 @@ function encode$4 (prefix, words, LIMIT) {
   prefix = prefix.toLowerCase();
 
   // determine chk mod
-  var chk = prefixChk$1(prefix);
+  var chk = prefixChk(prefix);
   if (typeof chk === 'string') throw new Error(chk)
 
   var result = prefix + '1';
@@ -19658,18 +18122,18 @@ function encode$4 (prefix, words, LIMIT) {
     var x = words[i];
     if ((x >> 5) !== 0) throw new Error('Non 5-bit word')
 
-    chk = polymodStep$1(chk) ^ x;
-    result += ALPHABET$1.charAt(x);
+    chk = polymodStep(chk) ^ x;
+    result += ALPHABET$2.charAt(x);
   }
 
   for (i = 0; i < 6; ++i) {
-    chk = polymodStep$1(chk);
+    chk = polymodStep(chk);
   }
   chk ^= 1;
 
   for (i = 0; i < 6; ++i) {
     var v = (chk >> ((5 - i) * 5)) & 0x1f;
-    result += ALPHABET$1.charAt(v);
+    result += ALPHABET$2.charAt(v);
   }
 
   return result
@@ -19694,15 +18158,15 @@ function __decode (str, LIMIT) {
   var wordChars = str.slice(split + 1);
   if (wordChars.length < 6) return 'Data too short'
 
-  var chk = prefixChk$1(prefix);
+  var chk = prefixChk(prefix);
   if (typeof chk === 'string') return chk
 
   var words = [];
   for (var i = 0; i < wordChars.length; ++i) {
     var c = wordChars.charAt(i);
-    var v = ALPHABET_MAP$1[c];
+    var v = ALPHABET_MAP$2[c];
     if (v === undefined) return 'Unknown character ' + c
-    chk = polymodStep$1(chk) ^ v;
+    chk = polymodStep(chk) ^ v;
 
     // not in the checksum?
     if (i + 6 >= wordChars.length) continue
@@ -19725,7 +18189,7 @@ function decode$4 (str) {
   throw new Error(res)
 }
 
-function convert$2 (data, inBits, outBits, pad) {
+function convert (data, inBits, outBits, pad) {
   var value = 0;
   var bits = 0;
   var maxV = (1 << outBits) - 1;
@@ -19754,24 +18218,24 @@ function convert$2 (data, inBits, outBits, pad) {
 }
 
 function toWordsUnsafe (bytes) {
-  var res = convert$2(bytes, 8, 5, true);
+  var res = convert(bytes, 8, 5, true);
   if (Array.isArray(res)) return res
 }
 
-function toWords$1 (bytes) {
-  var res = convert$2(bytes, 8, 5, true);
+function toWords (bytes) {
+  var res = convert(bytes, 8, 5, true);
   if (Array.isArray(res)) return res
 
   throw new Error(res)
 }
 
 function fromWordsUnsafe (words) {
-  var res = convert$2(words, 5, 8, false);
+  var res = convert(words, 5, 8, false);
   if (Array.isArray(res)) return res
 }
 
-function fromWords$1 (words) {
-  var res = convert$2(words, 5, 8, false);
+function fromWords (words) {
+  var res = convert(words, 5, 8, false);
   if (Array.isArray(res)) return res
 
   throw new Error(res)
@@ -19782,15 +18246,15 @@ var bech32 = {
   decode: decode$4,
   encode: encode$4,
   toWordsUnsafe: toWordsUnsafe,
-  toWords: toWords$1,
+  toWords: toWords,
   fromWordsUnsafe: fromWordsUnsafe,
-  fromWords: fromWords$1
+  fromWords: fromWords
 };
 
-const version$n = "providers/5.0.37";
+const version$m = "providers/5.0.37";
 
 "use strict";
-const logger$s = new Logger(version$n);
+const logger$s = new Logger(version$m);
 class Formatter {
     constructor() {
         logger$s.checkNew(new.target, Formatter);
@@ -20207,7 +18671,7 @@ var __awaiter$8 = (window && window.__awaiter) || function (thisArg, _arguments,
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const logger$t = new Logger(version$n);
+const logger$t = new Logger(version$m);
 //////////////////////////////
 // Event Serializeing
 function checkTopic(topic) {
@@ -21506,7 +19970,7 @@ var __awaiter$9 = (window && window.__awaiter) || function (thisArg, _arguments,
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const logger$u = new Logger(version$n);
+const logger$u = new Logger(version$m);
 const errorGas = ["call", "estimateGas"];
 function checkError(method, error, params) {
     // Undo the "convenience" some nodes are attempting to prevent backwards
@@ -21781,7 +20245,8 @@ class JsonRpcProvider extends BaseProvider {
             if (chainId != null) {
                 const getNetwork = getStatic(this.constructor, "getNetwork");
                 try {
-                    return getNetwork(BigNumber.from(chainId[0]).toNumber());
+                    // fix chainId bugs
+                    return getNetwork(BigNumber.from(Array.isArray(chainId) ? chainId[0] : chainId).toNumber());
                 }
                 catch (error) {
                     return logger$u.throwError("could not detect network", Logger.errors.NETWORK_ERROR, {
@@ -22000,7 +20465,7 @@ try {
     }
 }
 catch (error) {
-    const logger = new Logger(version$n);
+    const logger = new Logger(version$m);
     WS = function () {
         logger.throwError("WebSockets not supported in this environment", Logger.errors.UNSUPPORTED_OPERATION, {
             operation: "new WebSocket()"
@@ -22018,7 +20483,7 @@ var __awaiter$a = (window && window.__awaiter) || function (thisArg, _arguments,
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const logger$v = new Logger(version$n);
+const logger$v = new Logger(version$m);
 /**
  *  Notes:
  *
@@ -22298,7 +20763,7 @@ var __awaiter$b = (window && window.__awaiter) || function (thisArg, _arguments,
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const logger$w = new Logger(version$n);
+const logger$w = new Logger(version$m);
 // A StaticJsonRpcProvider is useful when you *know* for certain that
 // the backend will never change, as it never calls eth_chainId to
 // verify its backend. However, if the backend does change, the effects
@@ -22377,7 +20842,7 @@ class UrlJsonRpcProvider extends StaticJsonRpcProvider {
 }
 
 "use strict";
-const logger$x = new Logger(version$n);
+const logger$x = new Logger(version$m);
 // This key was provided to ethers.js by Alchemy to be used by the
 // default provider, but it is recommended that for your own
 // production environments, that you acquire your own API key at:
@@ -22455,7 +20920,7 @@ var __awaiter$c = (window && window.__awaiter) || function (thisArg, _arguments,
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const logger$y = new Logger(version$n);
+const logger$y = new Logger(version$m);
 class CloudflareProvider extends UrlJsonRpcProvider {
     static getApiKey(apiKey) {
         if (apiKey != null) {
@@ -22500,7 +20965,7 @@ var __awaiter$d = (window && window.__awaiter) || function (thisArg, _arguments,
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const logger$z = new Logger(version$n);
+const logger$z = new Logger(version$m);
 // The transaction has already been sanitized by the calls in Provider
 function getTransactionPostData(transaction) {
     const result = {};
@@ -22910,7 +21375,7 @@ var __awaiter$e = (window && window.__awaiter) || function (thisArg, _arguments,
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const logger$A = new Logger(version$n);
+const logger$A = new Logger(version$m);
 function now() { return (new Date()).getTime(); }
 // Returns to network as long as all agree, or null if any is null.
 // Throws an error if any two networks do not match.
@@ -23476,7 +21941,7 @@ class FallbackProvider extends BaseProvider {
 const IpcProvider = null;
 
 "use strict";
-const logger$B = new Logger(version$n);
+const logger$B = new Logger(version$m);
 const defaultProjectId = "84842078b09946638c03157f83405213";
 class InfuraWebSocketProvider extends WebSocketProvider {
     constructor(network, apiKey) {
@@ -23572,7 +22037,7 @@ class InfuraProvider extends UrlJsonRpcProvider {
 
 /* istanbul ignore file */
 "use strict";
-const logger$C = new Logger(version$n);
+const logger$C = new Logger(version$m);
 // Special API key provided by Nodesmith for ethers.js
 const defaultApiKey$2 = "ETHERS_JS_SHARED";
 class NodesmithProvider extends UrlJsonRpcProvider {
@@ -23609,7 +22074,7 @@ class NodesmithProvider extends UrlJsonRpcProvider {
 }
 
 "use strict";
-const logger$D = new Logger(version$n);
+const logger$D = new Logger(version$m);
 const defaultApplicationId = "5f7f8547b90218002e9ce9dd";
 class PocketProvider extends UrlJsonRpcProvider {
     static getApiKey(apiKey) {
@@ -23665,9 +22130,8 @@ class PocketProvider extends UrlJsonRpcProvider {
 }
 
 "use strict";
-const logger$E = new Logger(version$n);
+const logger$E = new Logger(version$m);
 let _nextId = 1;
-const isDBClient = (navigator && navigator.userAgent && navigator.userAgent.toLowerCase() || '').indexOf('dappbirds') > 0;
 function buildWeb3LegacyFetcher(provider, sendFunc) {
     return function (method, params) {
         // Metamask complains about eth_sign (and on some versions hangs)
@@ -23755,34 +22219,33 @@ class Web3Provider extends JsonRpcProvider {
         defineReadOnly(this, "provider", subprovider);
     }
     send(method, params) {
-        if (!window.conflux || !window.conflux.isConfluxPortal) {
-            return this.jsonRpcFetchFunc(method, params);
-        }
-        const { conflux } = window;
-        method = method.replace('eth_', 'cfx_');
-        method = method.replace('getTransactionCount', 'getNextNonce');
-        method = method.replace(/estimateGas$/, 'estimateGasAndCollateral');
-        method = method.replace('getBlockByNumber', 'getBlockByEpochNumber');
-        method = method.replace('cfx_epochNumber', 'cfx_epochNumber');
-        switch (method) {
-            case 'cfx_chainId':
-                return Promise.resolve([conflux.chainId]);
-            case 'net_version':
-                return Promise.resolve([conflux.networkVersion]);
-        }
-        // fix bugs in wallet db
-        if (isDBClient && params && params.length > 0) {
-            const index = params.indexOf('latest');
+        method = method.replace("eth_", "cfx_");
+        method = method.replace("getTransactionCount", "getNextNonce");
+        method = method.replace(/estimateGas$/, "estimateGasAndCollateral");
+        method = method.replace("getBlockByNumber", "getBlockByEpochNumber");
+        method = method.replace("cfx_epochNumber", "cfx_epochNumber");
+        method = method.replace("net_version", "cfx_chainId");
+        // fix conflux compatible bugs
+        method = method === "cfx_signTypedData_v4_old" ? "eth_signTypedData_v4" : (method.replace("eth", "cfx"));
+        if (params && params.length > 0) {
+            const index = params.indexOf("latest");
             if (index >= 0) {
-                params[index] = 'latest_state';
+                params[index] = "latest_state";
+            }
+            const chainId = this.network ? this.network.chainId : 1029;
+            if (params[0] && params[0].to) {
+                params[0].to = getBase32AddressFromHex40(params[0].to, chainId);
+            }
+            if (params[0] && params[0].from) {
+                params[0].from = getBase32AddressFromHex40(params[0].from, chainId);
             }
         }
-        return this.jsonRpcFetchFunc(method.replace('eth', 'cfx'), params);
+        return this.jsonRpcFetchFunc(method, params);
     }
 }
 
 "use strict";
-const logger$F = new Logger(version$n);
+const logger$F = new Logger(version$m);
 ////////////////////////
 // Helper Functions
 function getDefaultProvider(network, options) {
@@ -23938,10 +22401,10 @@ function sha256$2(types, values) {
     return sha256$1(pack$1(types, values));
 }
 
-const version$o = "units/5.0.37";
+const version$n = "units/5.0.37";
 
 "use strict";
-const logger$G = new Logger(version$o);
+const logger$G = new Logger(version$n);
 const names = [
     "wei",
     "kwei",
@@ -24023,7 +22486,7 @@ function parseEther(ether) {
 
 "use strict";
 
-var utils$1 = /*#__PURE__*/Object.freeze({
+var utils$2 = /*#__PURE__*/Object.freeze({
 	__proto__: null,
 	AbiCoder: AbiCoder,
 	defaultAbiCoder: defaultAbiCoder,
@@ -24120,10 +22583,10 @@ var utils$1 = /*#__PURE__*/Object.freeze({
 	Indexed: Indexed
 });
 
-const version$p = "conflux-main/5.0.37";
+const version$o = "conflux-main/5.0.37";
 
 "use strict";
-const logger$H = new Logger(version$p);
+const logger$H = new Logger(version$o);
 
 var ethers = /*#__PURE__*/Object.freeze({
 	__proto__: null,
@@ -24139,9 +22602,9 @@ var ethers = /*#__PURE__*/Object.freeze({
 	constants: index$1,
 	get errors () { return ErrorCode; },
 	logger: logger$H,
-	utils: utils$1,
+	utils: utils$2,
 	wordlists: wordlists,
-	version: version$p,
+	version: version$o,
 	Wordlist: Wordlist
 });
 
@@ -24154,5 +22617,5 @@ try {
 }
 catch (error) { }
 
-export { BigNumber, Contract, ContractFactory, FixedNumber, Signer, VoidSigner, Wallet, Wordlist, index$1 as constants, ErrorCode as errors, ethers, getDefaultProvider, logger$H as logger, index$3 as providers, utils$1 as utils, version$p as version, wordlists };
+export { BigNumber, Contract, ContractFactory, FixedNumber, Signer, VoidSigner, Wallet, Wordlist, index$1 as constants, ErrorCode as errors, ethers, getDefaultProvider, logger$H as logger, index$3 as providers, utils$2 as utils, version$o as version, wordlists };
 //# sourceMappingURL=ethers.esm.js.map
