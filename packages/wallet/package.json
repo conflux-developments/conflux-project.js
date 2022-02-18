@@ -1,21 +1,21 @@
 {
   "author": "Richard Moore <me@ricmoo.com>",
   "dependencies": {
-    "@confluxproject/abstract-provider": "^5.0.37",
-    "@confluxproject/abstract-signer": "^5.0.37",
-    "@confluxproject/address": "^5.0.37",
-    "@confluxproject/bignumber": "^5.0.37",
-    "@confluxproject/bytes": "^5.0.37",
-    "@confluxproject/hash": "^5.0.37",
-    "@confluxproject/hdnode": "^5.0.37",
-    "@confluxproject/json-wallets": "^5.0.37",
-    "@confluxproject/keccak256": "^5.0.37",
-    "@confluxproject/logger": "^5.0.37",
-    "@confluxproject/properties": "^5.0.37",
-    "@confluxproject/random": "^5.0.37",
-    "@confluxproject/signing-key": "^5.0.37",
-    "@confluxproject/transactions": "^5.0.37",
-    "@confluxproject/wordlists": "^5.0.37"
+    "@confluxproject/abstract-provider": "^5.0.38",
+    "@confluxproject/abstract-signer": "^5.0.38",
+    "@confluxproject/address": "^5.0.38",
+    "@confluxproject/bignumber": "^5.0.38",
+    "@confluxproject/bytes": "^5.0.38",
+    "@confluxproject/hash": "^5.0.38",
+    "@confluxproject/hdnode": "^5.0.38",
+    "@confluxproject/json-wallets": "^5.0.38",
+    "@confluxproject/keccak256": "^5.0.38",
+    "@confluxproject/logger": "^5.0.38",
+    "@confluxproject/properties": "^5.0.38",
+    "@confluxproject/random": "^5.0.38",
+    "@confluxproject/signing-key": "^5.0.38",
+    "@confluxproject/transactions": "^5.0.38",
+    "@confluxproject/wordlists": "^5.0.38"
   },
   "description": "Classes for managing, encrypting and decrypting Ethereum private keys as a Signer for conflux.",
   "keywords": [
@@ -39,5 +39,5 @@
   "sideEffects": false,
   "tarballHash": "0x5a20d69b99052391b9cf659f97f9993e8a1a4ce96758afd05a184df1ecf6c30f",
   "types": "./lib/index.d.ts",
-  "version": "5.0.37"
+  "version": "5.0.38"
 }
