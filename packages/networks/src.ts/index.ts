@@ -21,151 +21,159 @@ function isRenetworkable(value: any): value is Renetworkable {
     return (value && typeof(value.renetwork) === "function");
 }
 
-function ethDefaultProvider(network: string | Network): Renetworkable {
-    const func = function(providers: any, options?: any): any {
-        if (options == null) { options = { }; }
-        const providerList: Array<any> = [];
+// function ethDefaultProvider(network: string | Network): Renetworkable {
+//     const func = function(providers: any, options?: any): any {
+//         if (options == null) { options = { }; }
+//         const providerList: Array<any> = [];
 
-        if (providers.InfuraProvider) {
-            try {
-                providerList.push(new providers.InfuraProvider(network, options.infura));
-            } catch(error) { }
-        }
+//         if (providers.InfuraProvider) {
+//             try {
+//                 providerList.push(new providers.InfuraProvider(network, options.infura));
+//             } catch(error) { }
+//         }
 
-        if (providers.EtherscanProvider) {
-            try {
-                providerList.push(new providers.EtherscanProvider(network, options.etherscan));
-            } catch(error) { }
-        }
+//         if (providers.EtherscanProvider) {
+//             try {
+//                 providerList.push(new providers.EtherscanProvider(network, options.etherscan));
+//             } catch(error) { }
+//         }
 
-        if (providers.AlchemyProvider) {
-            try {
-                providerList.push(new providers.AlchemyProvider(network, options.alchemy));
-            } catch(error) { }
-        }
+//         if (providers.AlchemyProvider) {
+//             try {
+//                 providerList.push(new providers.AlchemyProvider(network, options.alchemy));
+//             } catch(error) { }
+//         }
 
-        if (providers.CloudflareProvider) {
-            try {
-                providerList.push(new providers.CloudflareProvider(network));
-            } catch(error) { }
-        }
+//         if (providers.CloudflareProvider) {
+//             try {
+//                 providerList.push(new providers.CloudflareProvider(network));
+//             } catch(error) { }
+//         }
 
-        if (providerList.length === 0) { return null; }
+//         if (providerList.length === 0) { return null; }
 
-        if (providers.FallbackProvider) {
-            let quorum = 1;
-            if (options.quorum != null) {
-                quorum = options.quorum;
-            } else if (network === "homestead") {
-                quorum = 2;
-            }
-            return new providers.FallbackProvider(providerList, quorum);
-        }
+//         if (providers.FallbackProvider) {
+//             let quorum = 1;
+//             if (options.quorum != null) {
+//                 quorum = options.quorum;
+//             } else if (network === "homestead") {
+//                 quorum = 2;
+//             }
+//             return new providers.FallbackProvider(providerList, quorum);
+//         }
 
-        return providerList[0];
-    };
+//         return providerList[0];
+//     };
 
-    func.renetwork = function(network: Network) {
-        return ethDefaultProvider(network);
-    };
+//     func.renetwork = function(network: Network) {
+//         return ethDefaultProvider(network);
+//     };
 
-    return func;
-}
+//     return func;
+// }
 
-function etcDefaultProvider(url: string, network: string | Network): Renetworkable {
-    const func = function(providers: any, options?: any): any {
-        if (providers.JsonRpcProvider) {
-            return new providers.JsonRpcProvider(url, network);
-        }
+// function etcDefaultProvider(url: string, network: string | Network): Renetworkable {
+//     const func = function(providers: any, options?: any): any {
+//         if (providers.JsonRpcProvider) {
+//             return new providers.JsonRpcProvider(url, network);
+//         }
 
-        return null;
-    };
+//         return null;
+//     };
 
-    func.renetwork = function(network: Network) {
-        return etcDefaultProvider(url, network);
-    };
+//     func.renetwork = function(network: Network) {
+//         return etcDefaultProvider(url, network);
+//     };
 
-    return func;
-}
+//     return func;
+// }
 
-const homestead: Network = {
-    chainId: 1,
-    ensAddress: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
-    name: "homestead",
-    _defaultProvider: ethDefaultProvider("homestead")
-};
+// const homestead: Network = {
+//     chainId: 1,
+//     ensAddress: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
+//     name: "homestead",
+//     _defaultProvider: ethDefaultProvider("homestead")
+// };
 
-const ropsten: Network = {
-    chainId: 3,
-    ensAddress: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
-    name: "ropsten",
-    _defaultProvider: ethDefaultProvider("ropsten")
-};
+// const ropsten: Network = {
+//     chainId: 3,
+//     ensAddress: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
+//     name: "ropsten",
+//     _defaultProvider: ethDefaultProvider("ropsten")
+// };
 
-const classicMordor: Network = {
-    chainId: 63,
-    name: "classicMordor",
-    _defaultProvider: etcDefaultProvider("https://www.ethercluster.com/mordor", "classicMordor")
-};
+// const classicMordor: Network = {
+//     chainId: 63,
+//     name: "classicMordor",
+//     _defaultProvider: etcDefaultProvider("https://www.ethercluster.com/mordor", "classicMordor")
+// };
 
 const networks: { [name: string]: Network } = {
-    unspecified: {
-        chainId: 0,
-        name: "unspecified"
+    mainnet: {
+        chainId: 1029,
+        name: "mainnet"
     },
-
-    homestead: homestead,
-    mainnet: homestead,
-
-    morden: {
-        chainId: 2,
-        name: "morden"
+    testnet: {
+        chainId: 1,
+        name: "testnet"
     },
+    // unspecified: {
+    //     chainId: 0,
+    //     name: "unspecified"
+    // },
 
-    ropsten: ropsten,
-    testnet: ropsten,
+    // homestead: homestead,
+    // mainnet: homestead,
 
-    rinkeby: {
-        chainId: 4,
-        ensAddress: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
-        name: "rinkeby",
-        _defaultProvider: ethDefaultProvider("rinkeby")
-    },
+    // morden: {
+    //     chainId: 2,
+    //     name: "morden"
+    // },
 
-    kovan: {
-        chainId: 42,
-        name: "kovan",
-        _defaultProvider: ethDefaultProvider("kovan")
-    },
+    // ropsten: ropsten,
+    // testnet: ropsten,
 
-    goerli: {
-        chainId: 5,
-        ensAddress: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
-        name: "goerli",
-        _defaultProvider: ethDefaultProvider("goerli")
-     },
+    // rinkeby: {
+    //     chainId: 4,
+    //     ensAddress: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
+    //     name: "rinkeby",
+    //     _defaultProvider: ethDefaultProvider("rinkeby")
+    // },
+
+    // kovan: {
+    //     chainId: 42,
+    //     name: "kovan",
+    //     _defaultProvider: ethDefaultProvider("kovan")
+    // },
+
+    // goerli: {
+    //     chainId: 5,
+    //     ensAddress: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
+    //     name: "goerli",
+    //     _defaultProvider: ethDefaultProvider("goerli")
+    //  },
 
 
-    // ETC (See: #351)
-    classic: {
-        chainId: 61,
-        name: "classic",
-        _defaultProvider: etcDefaultProvider("https://www.ethercluster.com/etc", "classic")
-    },
+    // // ETC (See: #351)
+    // classic: {
+    //     chainId: 61,
+    //     name: "classic",
+    //     _defaultProvider: etcDefaultProvider("https://www.ethercluster.com/etc", "classic")
+    // },
 
-    classicMorden: {
-        chainId: 62,
-        name: "classicMorden",
-    },
+    // classicMorden: {
+    //     chainId: 62,
+    //     name: "classicMorden",
+    // },
 
-    classicMordor: classicMordor,
-    classicTestnet: classicMordor,
+    // classicMordor: classicMordor,
+    // classicTestnet: classicMordor,
 
-    classicKotti: {
-        chainId: 6,
-        name: "classicKotti",
-        _defaultProvider: etcDefaultProvider("https://www.ethercluster.com/kotti", "classicKotti")
-    },
+    // classicKotti: {
+    //     chainId: 6,
+    //     name: "classicKotti",
+    //     _defaultProvider: etcDefaultProvider("https://www.ethercluster.com/kotti", "classicKotti")
+    // },
 }
 
 /**

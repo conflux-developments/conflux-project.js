@@ -5,7 +5,7 @@ import { BigNumber, BigNumberish, _base16To36, _base36To16 } from "@confluxproje
 import { keccak256 } from "@confluxproject/keccak256";
 import { encode } from "@confluxproject/rlp";
 // @ts-ignore
-import { decode as confluxAddressDecode, encode as confluxAddressEncode } from 'conflux-address-js';
+import { decode as confluxAddressDecode, encode as confluxAddressEncode } from "@conflux-dev/conflux-address-js";
 
 import { Logger } from "@confluxproject/logger";
 import { version } from "./_version";

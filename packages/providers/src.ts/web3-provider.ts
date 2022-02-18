@@ -2,7 +2,7 @@
 
 import { Networkish } from "@confluxproject/networks";
 import { defineReadOnly } from "@confluxproject/properties";
-
+import { getBase32AddressFromHex40 } from "@confluxproject/address";
 import { Logger } from "@confluxproject/logger";
 import { version } from "./_version";
 const logger = new Logger(version);
@@ -20,8 +20,6 @@ export type ExternalProvider = {
 }
 
 let _nextId = 1;
-
-const isDBClient = (navigator && navigator.userAgent && navigator.userAgent.toLowerCase() || '').indexOf('dappbirds') > 0
 
 export type JsonRpcFetchFunc = (method: string, params?: Array<any>) => Promise<any>;
 
@@ -124,28 +122,28 @@ export class Web3Provider extends JsonRpcProvider {
     }
 
     send(method: string, params: Array<any>): Promise<any> {
-        if (!window.conflux || !window.conflux.isConfluxPortal) {
-            return this.jsonRpcFetchFunc(method, params)
-        }
-        const { conflux } = window
-        method = method.replace('eth_', 'cfx_')
-        method = method.replace('getTransactionCount', 'getNextNonce')
-        method = method.replace(/estimateGas$/, 'estimateGasAndCollateral')
-        method = method.replace('getBlockByNumber', 'getBlockByEpochNumber')
-        method = method.replace('cfx_epochNumber', 'cfx_epochNumber')
-        switch (method) {
-        case 'cfx_chainId':
-            return Promise.resolve([conflux.chainId])
-        case 'net_version':
-            return Promise.resolve([conflux.networkVersion])
-        }
-        // fix bugs in wallet db
-        if (isDBClient && params && params.length > 0) {
-            const index = params.indexOf('latest')
+        method = method.replace("eth_", "cfx_");
+        method = method.replace("getTransactionCount", "getNextNonce");
+        method = method.replace(/estimateGas$/, "estimateGasAndCollateral");
+        method = method.replace("getBlockByNumber", "getBlockByEpochNumber");
+        method = method.replace("cfx_epochNumber", "cfx_epochNumber");
+        method = method.replace("net_version", "cfx_chainId");
+
+        // fix conflux compatible bugs
+        method = method === "cfx_signTypedData_v4_old" ? "eth_signTypedData_v4" : (method.replace("eth", "cfx"));
+        if (params && params.length > 0) {
+            const index = params.indexOf("latest");
             if (index >= 0) {
-                params[index] = 'latest_state'
+                params[index] = "latest_state";
+            }
+            const chainId: number = this.network ? this.network.chainId : 1029;
+            if (params[0] && params[0].to) {
+                params[0].to = getBase32AddressFromHex40(params[0].to, chainId);
+            }
+            if (params[0] && params[0].from) {
+                params[0].from = getBase32AddressFromHex40(params[0].from, chainId);
             }
         }
-        return this.jsonRpcFetchFunc(method.replace('eth', 'cfx'), params)
+        return this.jsonRpcFetchFunc(method, params);
     }
 }
