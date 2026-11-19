@@ -41,6 +41,38 @@ The application is installed software, not a web page and not an extension, so i
 
 This repository is one of the four pages that make up the Conflux Wallet GitHub presence; the download, the release notes and every guide live in the repositories linked below.
 
+## Who it is for
+
+- You keep your own keys and want the phrase to be asked for once, on your machine, at restoration.
+- You have used a browser wallet and want a build that cannot be swapped by a host page.
+- You are setting up a second computer and need the same accounts without moving funds.
+
+## Your first ten minutes
+
+1. Take the installer from the release page and read the version in its file name before running it.
+2. Check the file against the release page entry; a mirror or a forwarded link is not the project's build.
+3. Run the installer, allow the permission prompt, and open the application once.
+4. Create an account, or restore one from a phrase you already hold, and compare the derived address.
+5. Write the phrase down in order, twice, and store the copies offline before the wallet holds value.
+
+## What this page covers, and what it does not
+
+This page is the wallet's product page on a repository that predates it, so it explains the download, the keys and the boundary of self-custody. It does not describe this repository's own code, its API or its history, and it does not restate the guides: each step that needs detail links to the page that carries it.
+
+## Questions before you download
+
+### Does this repository hold the wallet's source code?
+
+No. The application is distributed as a signed installer from the release page, and its source is not public. This repository is part of the project's GitHub presence, not its build system.
+
+### Can I use the wallet without a browser?
+
+Yes. It is installed software with its own window, so nothing about it depends on an extension, a tab or a session. That is also why a web page that offers to connect to it is not the wallet itself.
+
+### What should I do if I already have an older build?
+
+Install the current release over it. The installer replaces the application and keeps the encrypted key store, so the accounts and the password survive the update.
+
 ---
 
 ## Guides
